@@ -69,6 +69,7 @@
     git
     gh
     fastfetch
+    python3
   ];
 
 

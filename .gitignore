@@ -10,9 +10,6 @@ result
 *.pem
 *.key
 
-# Hardware configuration
-hardware-configuration.nix
-
 # Ignore wallpapers
 wallpapers/*
 !wallpapers/default.jpg
