@@ -1,0 +1,18 @@
+# Neovim / shell temp files
+*.save
+*~
+
+# Nix build links and local dev environments
+result
+.direnv/
+
+# Local secret keys
+*.pem
+*.key
+
+# Hardware configuration
+hardware-configuration.nix
+
+# Ignore wallpapers
+wallpapers/*
+!wallpapers/default.jpg
