@@ -4,7 +4,7 @@
   stylix.enable = true;
   stylix.autoEnable = true;
 
-  stylix.image = ../../wallpapers/a_map_of_a_city.jpg;
+  stylix.image = ../../wallpapers/default.jpg;
   
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/ayu-mirage.yaml"; # force hand crafted Base16 scheme from nixpkgs (https://tinted-theming.github.io/tinted-gallery/)
 
