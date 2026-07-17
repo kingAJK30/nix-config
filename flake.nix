@@ -9,6 +9,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
    
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+    lazyvim.url = "github:pfassina/lazyvim-nix";
 
     mangowm = {
       url = "github:mangowm/mango";
@@ -32,7 +33,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, mangowm, stylix, nixpkgs-stable, nixvim, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, mangowm, stylix, nixpkgs-stable, lazyvim, ... }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";

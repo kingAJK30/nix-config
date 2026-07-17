@@ -9,7 +9,7 @@
     ./modules/home/mango.nix
     ./modules/home/gaming.nix
     ./modules/home/engineering.nix
-    ./modules/home/neovim
+    ./modules/home/neovim.nix
     ./modules/home/yazi.nix
     ./modules/home/stylix.nix
   ];
