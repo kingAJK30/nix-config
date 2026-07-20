@@ -12,6 +12,7 @@
     ./modules/home/neovim.nix
     ./modules/home/yazi.nix
     ./modules/home/stylix.nix
+    ./modules/home/davinci.nix
   ];
 
   home.username = "king";
@@ -29,6 +30,7 @@
     })
     unzip
     speedtest-cli
+    obsidian
   ];
 
   home.file = {};
