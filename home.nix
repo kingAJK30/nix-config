@@ -25,9 +25,9 @@
     gcc
     clang-tools
     bear
-    (pkgs.blender.override {
-      cudaSupport = true;
-    })
+    #(pkgs.blender.override {
+    #  cudaSupport = true;
+    #})
     unzip
     speedtest-cli
     obsidian
