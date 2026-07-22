@@ -13,6 +13,7 @@
     ./modules/home/yazi.nix
     ./modules/home/stylix.nix
     ./modules/home/davinci.nix
+    ./modules/home/godot.nix
   ];
 
   home.username = "king";
