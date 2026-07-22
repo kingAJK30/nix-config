@@ -32,6 +32,7 @@
     unzip
     speedtest-cli
     obsidian
+    vesktop
   ];
 
   home.file = {};
