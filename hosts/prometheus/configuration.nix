@@ -5,8 +5,8 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/system/core/
-    ../../modules/system/display/
+    ../../modules/system/core
+    ../../modules/system/display
     ../../modules/system/hardware/nvidia.nix
   ];
 
@@ -26,7 +26,9 @@
       experimental-features = "nix-command flakes";
       flake-registry = "";
       substituters = [ "https://cuda-maintainers.cachix.org" ];
-      trusted-public-keys = [ "cuda-maintainers.cachix.org-1:0dgv7yl7uJL7hHS42cAxNsIsZea8N5KeeJ68A7iFXv4=" ];
+      trusted-public-keys = [
+        "cuda-maintainers.cachix.org-1:0dgv7yl7uJL7hHS42cAxNsIsZea8N5KeeJ68A7iFXv4="
+      ];
     };
     gc = {
       automatic = true;

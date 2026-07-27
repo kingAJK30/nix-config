@@ -4,10 +4,10 @@
 }:
 {
   imports = [
-    ../../modules/home/apps/
-    ../../modules/home/core/
-    ../../modules/home/desktop/
-    ../../modules/home/dev/
+    ../../modules/home/apps
+    ../../modules/home/core
+    ../../modules/home/desktop
+    ../../modules/home/dev
   ];
 
   nixpkgs = {

@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   options.services.globalTerminal = lib.mkOption {
     type = lib.types.str;
     default = "alacritty";

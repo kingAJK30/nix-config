@@ -1,7 +1,8 @@
 {
   pkgs,
   ...
-}: {
+}:
+{
   fonts = {
     packages = with pkgs; [
       nerd-fonts.jetbrains-mono
@@ -16,8 +17,8 @@
       defaultFonts = {
         monospace = [ "JetBrainsMono Nerd Font" ];
         sansSerif = [ "Noto Sans" ];
-        serif     = [ "Noto Serif" ];
-        emoji     = [ "Noto Color Emoji" ];
+        serif = [ "Noto Serif" ];
+        emoji = [ "Noto Color Emoji" ];
       };
     };
   };

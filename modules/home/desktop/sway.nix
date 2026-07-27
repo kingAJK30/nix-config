@@ -1,11 +1,12 @@
 {
   config,
   ...
-}: {
+}:
+{
   wayland.windowManager.sway = {
     enable = true;
     config = {
-      modifier = "Mod4"; #Super
+      modifier = "Mod4"; # Super
       terminal = config.services.globalTerminal;
       menu = config.services.globalMenu;
 

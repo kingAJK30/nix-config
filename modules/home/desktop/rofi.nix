@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   options.services.globalMenu = lib.mkOption {
     type = lib.types.str;
     default = "rofi -show drun";

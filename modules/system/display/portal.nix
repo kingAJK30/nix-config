@@ -1,7 +1,8 @@
 {
   pkgs,
   ...
-}: {
+}:
+{
   security.polkit.enable = true;
 
   xdg.portal = {
