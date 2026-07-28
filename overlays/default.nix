@@ -1,9 +1,4 @@
 { inputs, ... }: {
-  additions = final: _prev: import ../pkgs final.pkgs;
-
-  modifications = final: prev: {
-    # example = prev.example.overrideAttrs (oldAttrs: rec {
-    # ...
-    # });
-  };
+  additions = import ./additions.nix { inherit inputs; };
+  modifications = import ./modifications.nix { inherit inputs; };
 }

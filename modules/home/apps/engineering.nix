@@ -4,9 +4,9 @@
 }:
 {
   home.packages = with pkgs; [
-    bambu-studio
+    orca-slicer
     kicad
     openscad
-    (blender.override { cudaSupport = true; })
+    blender
   ];
 }
