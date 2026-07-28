@@ -5,8 +5,12 @@
 {
   programs.git = {
     enable = true;
-    userName = "KingAJK30";
-    userEmail = "86845258+kingAJK30@users.noreply.github.com";
+    settings = {
+      user = {
+        name = "KingAJK30";
+        email = "86845258+kingAJK30@users.noreply.github.com";
+      };
+    };
   };
 
   programs.gh = {
