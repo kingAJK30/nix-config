@@ -1,3 +1,8 @@
-{
-  # my-module = import ./my-module.nix;
+{ }: {
+  imports = [
+    ./foot.nix
+    # ./alacritty.nix
+    ./rofi.nix
+    ./sway.nix
+  ];
 }
