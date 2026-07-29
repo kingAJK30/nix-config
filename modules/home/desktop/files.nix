@@ -4,9 +4,8 @@
 }:
 {
   home.packages = with pkgs; [
-    firefox
-    obsidian
+    yazi
+    thunar
     vesktop
-    localsend
   ];
 }

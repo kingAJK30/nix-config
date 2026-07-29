@@ -4,5 +4,6 @@
     # ./alacritty.nix
     ./rofi.nix
     ./sway.nix
+    ./files.nix
   ];
 }

@@ -4,9 +4,9 @@
 }:
 {
   home.packages = with pkgs; [
-    firefox
-    obsidian
-    vesktop
-    localsend
+    mpv
+    ffmpeg
+    yt-dlp
+    audacity
   ];
 }
