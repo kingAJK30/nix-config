@@ -9,7 +9,7 @@
     ../../modules/system/core
     ../../modules/system/display
     ../../modules/system/gaming
-    ../../modules/system/hardware/nvidia.nix
+    ../../modules/system/hardware/amd.nix
   ];
 
   nixpkgs = {

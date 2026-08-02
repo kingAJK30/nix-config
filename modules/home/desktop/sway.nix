@@ -5,7 +5,7 @@
 {
   wayland.windowManager.sway = {
     enable = true;
-    extraOptions = [ "--unsupported-gpu" ];
+#    extraOptions = [ "--unsupported-gpu" ];
     config = {
       modifier = "Mod4"; # Super
       terminal = config.services.globalTerminal;
