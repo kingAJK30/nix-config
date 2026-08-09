@@ -5,5 +5,6 @@
     ./rofi.nix
     ./sway.nix
     ./files.nix
+    ./cli.nix
   ];
 }
