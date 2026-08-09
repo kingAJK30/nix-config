@@ -10,5 +10,6 @@
     fzf
     ouch
     hyperfine
+    tree
   ];
 }

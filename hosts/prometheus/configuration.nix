@@ -26,6 +26,11 @@
     inputs.home-manager.packages.${pkgs.system}.default
   ];
 
+  environment.sessionVariables.XDG_DATA_DIRS = [
+    "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
+    "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
+  ];
+
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
@@ -61,7 +66,6 @@
         "networkmanager"
         "wheel"
         "video"
-        "audio"
       ];
     };
   };

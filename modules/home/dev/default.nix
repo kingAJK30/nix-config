@@ -1,3 +1,6 @@
-{
-  # my-module = import ./my-module.nix;
+{ ... }: {
+  imports = [
+    ./dev.nix
+    ./neovim.nix
+  ];
 }
