@@ -22,6 +22,10 @@
     };
   };
 
+  environment.systemPackages = [
+    inputs.home-manager.packages.${pkgs.system}.default
+  ];
+
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
