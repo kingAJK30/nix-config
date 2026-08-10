@@ -1,9 +1,15 @@
-{ self, ... }: {
+{ pkgs, self, ... }: {
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+
+    extraPackages = with pkgs; [
+      ripgrep
+      fd
+      tree-sitter
+    ];
 
     colorschemes.gruvbox.enable = true;
 
@@ -52,17 +58,29 @@
             installCargo = true;
             installRustc = true;
           };
+          
+	  # Lua
+	  lua_ls = {
+            enable = true;
+            settings.diagnostics.globals = [ "vim" ];
+          };
+
+	  # Javascript / Typescript
+	  ts_ls = {
+	    enable = true;
+	    filetypes = [
+	      "javascript"
+              "javascriptreact"
+              "typescript"
+              "typescriptreact"
+	    ];
+	  };
 
           pyright.enable = true; # Python
           clangd.enable = true; # C / C++
           gopls.enable = true; # Go
-          lua_ls = { # Lua
-            enable = true;
-            settings.diagnostics.globals = [ "vim" ];
-          };
           html.enable = true; # HTML
           cssls.enable = true; # CSS
-          ts_ls.enable = true; # JavaScript / TypeScript
         };
       };
 
@@ -82,6 +100,7 @@
             "<Tab>" = {
               __raw = ''
                 cmp.mapping(function(fallback)
+                  local luasnip = require("luasnip")
                   if cmp.visible() then
                     cmp.select_next_item()
                   elseif luasnip.expand_or_jumpable() then
@@ -95,6 +114,7 @@
             "<S-Tab>" = {
               __raw = ''
                 cmp.mapping(function(fallback)
+                  local luasnip = require("luasnip")
                   if cmp.visible() then
                     cmp.select_prev_item()
                   elseif luasnip.jumpable(-1) then
