@@ -10,7 +10,7 @@ let
   };
 in
 {
-#  blender = pkgs-unstable.blender.override {
-#    cudaSupport = true;
-#  };
+  #  blender = pkgs-unstable.blender.override {
+  #    cudaSupport = true;
+  #  };
 }

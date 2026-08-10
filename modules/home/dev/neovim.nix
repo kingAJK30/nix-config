@@ -58,23 +58,23 @@
             installCargo = true;
             installRustc = true;
           };
-          
-	  # Lua
-	  lua_ls = {
+
+          # Lua
+          lua_ls = {
             enable = true;
             settings.diagnostics.globals = [ "vim" ];
           };
 
-	  # Javascript / Typescript
-	  ts_ls = {
-	    enable = true;
-	    filetypes = [
-	      "javascript"
+          # Javascript / Typescript
+          ts_ls = {
+            enable = true;
+            filetypes = [
+              "javascript"
               "javascriptreact"
               "typescript"
               "typescriptreact"
-	    ];
-	  };
+            ];
+          };
 
           pyright.enable = true; # Python
           clangd.enable = true; # C / C++
@@ -96,7 +96,9 @@
           ];
 
           mapping = {
-            "<CR>" = { __raw = "cmp.mapping.confirm({ select = true })"; };
+            "<CR>" = {
+              __raw = "cmp.mapping.confirm({ select = true })";
+            };
             "<Tab>" = {
               __raw = ''
                 cmp.mapping(function(fallback)
