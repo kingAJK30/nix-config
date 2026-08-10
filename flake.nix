@@ -7,6 +7,8 @@
 
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixvim.url = "github:nix-community/nixvim/nixos-26.05";
   };
 
   outputs =
@@ -48,6 +50,7 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs; };
           modules = [
+	    nixvim.nixosModules.nixvim
             ./users/king/home.nix
           ];
         };
