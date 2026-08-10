@@ -16,6 +16,7 @@
       self,
       nixpkgs,
       home-manager,
+      nixvim,
       ...
     }@inputs:
     let
@@ -50,7 +51,7 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs; };
           modules = [
-	    nixvim.nixosModules.nixvim
+	    nixvim.homeModules.nixvim
             ./users/king/home.nix
           ];
         };
