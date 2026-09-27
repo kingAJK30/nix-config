@@ -6,13 +6,27 @@
     };
   };
 
-  perSystem = { pkgs, lib, ... }: {
+  perSystem = { pkgs, lib, ... }: let
     packages.Name = inputs.wrapper-modules.wrappers.name.wrap {
       inherit pkgs;
 
-      settings = {
+      baseSettings = {
 
       };
+
+    mkName = userSettings: inputs.wrapper-modules.wrappers.name.wrap {
+      inherit pkgs;
+      settings = lib.recursiveUpdate baseSettings userSettings;
+    };
+
+  in {
+    packages = {
+      Name = inputs.wrapper-modules.wrappers.name.wrap {
+        inherit pkgs;
+        settings = baseSettings;
+      };
+
+      Name-User = mkName (import ./user.nix);
     };
   };
 }
