@@ -1,6 +1,6 @@
 { self, inputs, ... }: {
   flake.nixosModules.Name = { pkgs, lib, ... }: {
-    programs.foot = {
+    programs.name = {
       enable = true;
       package = self.packages.${pkgs.stdenv.hostPlatform.system}.Name;
     };
@@ -12,14 +12,14 @@
 
     };
 
-    mkName = userSettings: inputs.wrapper-modules.wrappers.foot.wrap {
+    mkName = userSettings: inputs.wrapper-modules.wrappers.name.wrap {
       inherit pkgs;
       settings = lib.recursiveUpdate baseSettings userSettings;
     };
 
   in {
     packages = {
-      Name = inputs.wrapper-modules.wrappers.foot.wrap {
+      Name = inputs.wrapper-modules.wrappers.name.wrap {
         inherit pkgs;
         settings = baseSettings;
       };
