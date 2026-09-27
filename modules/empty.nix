@@ -24,7 +24,7 @@
         settings = baseSettings;
       };
 
-      Name-User = mkName (import ./name.nix);
+      Name-User = mkName (import ./_name.nix);
     };
   };
 }

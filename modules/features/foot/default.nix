@@ -27,7 +27,7 @@
         settings = baseSettings;
       };
 
-      Foot-King = mkFoot (import ./king.nix);
+      Foot-King = mkFoot (import ./_king.nix);
     };
   };
 }

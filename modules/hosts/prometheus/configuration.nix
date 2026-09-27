@@ -6,6 +6,7 @@
 
       self.nixosModules.niri
       self.nixosModules.fonts
+      self.nixosModules.rofi
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
