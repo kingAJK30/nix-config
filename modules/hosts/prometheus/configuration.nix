@@ -11,10 +11,11 @@
       self.nixosModules.attrs-development
 
       self.nixosModules.niri
-      self.nixosModules.rofi
     ];
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     
     hardware.enableRedistributableFirmware = true;
+
+    system.stateVersion = "26.05";
   };
 }

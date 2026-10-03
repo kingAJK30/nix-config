@@ -1,17 +1,8 @@
 { self, inputs, ... }: {
-  flake.nixosModules.rofi = { pkgs, lib, ... }: {
-    programs.rofi = {
-      enable = true;
-      package = self.packages.${pkgs.stdenv.hostPlatform.system}.Rofi;
-    };
-  };
-
   perSystem = { pkgs, lib, ... }: let
     
     baseSettings = {
       modes = "drun";
-      font = "jetbrains-mono 12";
-      show-icons = false;
     };
 
     mkRofi = userSettings: inputs.wrapper-modules.wrappers.rofi.wrap {
