@@ -26,7 +26,7 @@
         settings = baseSettings;
       };
 
-      Rofi-King = mkRofi (import ./king.nix);
+      Rofi-King = mkRofi (import ./_king.nix);
     };
   };
 }

@@ -1,150 +1,75 @@
 { pkgs }: {
   runtimePkgs = with pkgs; [
-    ripgrep
-    fd
-    tree-sitter
-
-    nixd
-    nixpkgs-fmt
-    rust-analyzer
-    cargo
-    rustc
-    lua-language-server
-    typescript-language-server
-    pyright
-    clang-tools
-    gopls
-    vscode-langservers-extracted
+    ripgrep fd
+    nixd nixpkgs-fmt # Nix tooling
+    rust-analyzer # Rust LSP
+    lua-language-server # Lua LSP
+    pyright # Python LSP
   ];
 
   specs = {
-    general = {
-      config = ''
-        -- Globals & Options
-        vim.g.mapleader = " "
-        vim.opt.number = true
-        vim.opt.relativenumber = true
-        vim.opt.shiftwidth = 2
+    treesitter.data = pkgs.vimPlugins.nvim-treesitter.withAllGrammars;
 
-        -- Keymaps
-        vim.keymap.set("n", "<leader>g", "<cmd>Telescope live_grep<CR>")
+    general.config = ''
+      -- Basics & UI
+      vim.g.mapleader = " "
+      vim.opt.number = true
+      vim.opt.relativenumber = true
+      vim.opt.shiftwidth = 2
+      vim.opt.expandtab = true
+      vim.opt.clipboard = "unnamedplus"
+      vim.opt.signcolumn = "yes"
+      
+      -- Native File Navigation & Netrw
+      vim.opt.path:append("**")
+      vim.opt.wildignore:append({ "*/.git/*", "*/node_modules/*", "*/target/*" })
+      vim.keymap.set("n", "<leader>f", ":find ", { desc = "Find File" })
+      vim.keymap.set("n", "<leader>b", ":b ", { desc = "Switch Buffer" })
+      vim.keymap.set("n", "<leader>e", vim.cmd.Ex, { desc = "Native Explorer" })
 
-        -- Highlights
-        vim.api.nvim_set_hl(0, "Comment", {
-          fg = "#ff00ff",
-          bg = "#000000",
-          underline = true,
-          bold = true,
-        })
-      '';
-    };
+      -- Native Treesitter Highlighting
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(args) pcall(vim.treesitter.start, args.buf) end,
+      })
 
-    gruvbox = {
-      data = pkgs.vimPlugins.gruvbox-nvim;
-      config = "vim.cmd[[colorscheme gruvbox]]";
-    };
-
-    web-devicons = {
-      data = pkgs.vimPlugins.nvim-web-devicons;
-    };
-
-    lualine = {
-      data = pkgs.vimPlugins.lualine-nvim;
-      config = "require('lualine').setup{}";
-    };
-
-    telescope = {
-      data = pkgs.vimPlugins.telescope-nvim;
-      config = "require('telescope').setup{}";
-    };
-
-    oil = {
-      data = pkgs.vimPlugins.oil-nvim;
-      config = "require('oil').setup{}";
-    };
-
-    treesitter = {
-      data = pkgs.vimPlugins.nvim-treesitter.withAllGrammars;
-      config = "require('nvim-treesitter.configs').setup{ highlight = { enable = true } }";
-    };
-
-    lspconfig = {
-      data = pkgs.vimPlugins.nvim-lspconfig;
-      config = ''
-        local lspconfig = require('lspconfig')
-
-        lspconfig.nixd.setup{
-          settings = {
-            formatting = { command = { "nixpkgs-fmt" } }
+      -- Native LSP Client Connection
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "nix", "rust", "lua", "python" },
+        callback = function(args)
+          local servers = {
+            nix = "nixd",
+            rust = "rust-analyzer",
+            lua = "lua-language-server",
+            python = "pyright"
           }
-        }
-        lspconfig.rust_analyzer.setup{}
-        lspconfig.lua_ls.setup{
-          settings = {
-            Lua = { diagnostics = { globals = { "vim" } } }
-          }
-        }
-        lspconfig.ts_ls.setup{}
-        lspconfig.pyright.setup{}
-        lspconfig.clangd.setup{}
-        lspconfig.gopls.setup{}
-        lspconfig.html.setup{}
-        lspconfig.cssls.setup{}
-      '';
-    };
+          local cmd = servers[vim.bo.filetype]
+          if cmd and vim.fn.executable(cmd) == 1 then
+            vim.lsp.start({
+              name = cmd,
+              cmd = { cmd },
+              root_dir = vim.fs.root(args.buf, {".git", "flake.nix", "Cargo.toml"})
+            })
+          end
+        end,
+      })
 
-    cmp = {
-      data = pkgs.vimPlugins.nvim-cmp;
-      config = ''
-        local cmp = require('cmp')
-        local luasnip = require('luasnip')
-
-        cmp.setup({
-          snippet = {
-            expand = function(args)
-              luasnip.lsp_expand(args.body)
-            end,
-          },
-          sources = cmp.config.sources({
-            { name = "nvim_lsp" },
-            { name = "luasnip" },
-            { name = "path" },
-          }, {
-            { name = "buffer" },
-          }),
-          mapping = {
-            ["<CR>"] = cmp.mapping.confirm({ select = true }),
-            ["<Tab>"] = cmp.mapping(function(fallback)
-              if cmp.visible() then
-                cmp.select_next_item()
-              elseif luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
-              else
-                fallback()
-              end
-            end, { "i", "s" }),
-            ["<S-Tab>"] = cmp.mapping(function(fallback)
-              if cmp.visible() then
-                cmp.select_prev_item()
-              elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-              else
-                fallback()
-              end
-            end, { "i", "s" }),
-          }
-        })
-      '';
-    };
-
-    cmp_sources = {
-      data = with pkgs.vimPlugins; [
-        cmp-nvim-lsp
-        cmp-path
-        cmp-buffer
-        cmp_luasnip
-        luasnip
-      ];
-    };
+      -- LSP Keymaps, Diagnostics, and Native Completion
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local map = function(keys, func) 
+            vim.keymap.set("n", keys, func, { buffer = args.buf }) 
+          end
+          
+          map("gd", vim.lsp.buf.definition)
+          map("K", vim.lsp.buf.hover)
+          map("<leader>rn", vim.lsp.buf.rename)
+          map("<leader>ca", vim.lsp.buf.code_action)
+          map("<leader>d", vim.diagnostic.open_float)
+          
+          -- Enable Native Omni-Completion (Trigger with Ctrl+X, Ctrl+O in Insert Mode)
+          vim.bo[args.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+        end,
+      })
+    '';
   };
 }

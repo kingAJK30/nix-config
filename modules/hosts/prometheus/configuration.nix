@@ -3,6 +3,7 @@
     imports = [
       self.nixosModules.prometheusHardware
       self.nixosModules.user-king
+      self.nixosModules.Amd
 
       self.nixosModules.niri
       self.nixosModules.fonts
