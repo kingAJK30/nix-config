@@ -1,5 +1,5 @@
 { self, inputs, ... }: {
-  flake.nixosModules.Rofi = { pkgs, lib, ... }: {
+  flake.nixosModules.rofi = { pkgs, lib, ... }: {
     programs.rofi = {
       enable = true;
       package = self.packages.${pkgs.stdenv.hostPlatform.system}.Rofi;

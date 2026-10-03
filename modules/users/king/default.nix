@@ -6,9 +6,9 @@
       extraGroups = [ "wheel" "networkmanager" ];
       
       packages = [
-        self.packages.${pkgs.system}.Foot-King
-	self.packages.${pkgs.system}.Rofi-King
-	self.packages.${pkgs.system}.Neovim-King
+        self.packages.${pkgs.stdenv.hostPlatform.system}.Foot-King
+	self.packages.${pkgs.stdenv.hostPlatform.system}.Rofi-King
+	self.packages.${pkgs.stdenv.hostPlatform.system}.Neovim-King
       ];
     };
   };
