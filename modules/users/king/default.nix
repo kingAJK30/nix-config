@@ -1,15 +1,24 @@
-{ self, ... }: {
-  flake.nixosModules.user-king = { pkgs, ... }: {
+{ self, inputs, ... }: {
+  flake.nixosModules.user-king = { ... }: {
+    imports = [ inputs.home-manager.nixosModules.home-manager ];
+
     users.users.king = {
       isNormalUser = true;
       description = "King";
       extraGroups = [ "wheel" "networkmanager" ];
-      
-      packages = [
-        self.packages.${pkgs.stdenv.hostPlatform.system}.Foot-King
-	self.packages.${pkgs.stdenv.hostPlatform.system}.Rofi-King
-	self.packages.${pkgs.stdenv.hostPlatform.system}.Neovim-King
-      ];
+    };
+
+    home-manager = {
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      backupFileExtension = "backup";
+      users.king = {
+	imports = (with self.modules.homeManager; [ foot sway ]) ++ [
+	  ./config/_foot.nix
+	  ./config/_sway.nix
+	];
+	home.stateVersion = "26.05";
+      };
     };
   };
 }

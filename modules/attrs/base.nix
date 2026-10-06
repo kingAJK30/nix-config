@@ -1,14 +1,6 @@
-{ self, inputs, ... }: {
+{ ... }: {
   flake.nixosModules.attrs-base = { pkgs, ... }: {
-    imports = [
-      self.nixosModules.Git
-    ];
-
-    environment.systemPackages = with pkgs; [
-      zip
-      unzip
-
-      tree
-    ];
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    environment.systemPackages = with pkgs; [ git tree zip unzip ];
   };
 }
