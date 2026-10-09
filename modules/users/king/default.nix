@@ -17,12 +17,14 @@
 	  attrs-base
 	  attrs-development
 	  attrs-graphical
+	  rofi
 	  sway
 	]) ++ [
 	  ./config/_foot.nix
 	  ./config/_sway.nix
 	  ./config/_nvim.nix
 	  ./config/_git.nix
+	  ./config/_rofi.nix
 	];
 	home.stateVersion = "26.05";
       };

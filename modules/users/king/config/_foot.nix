@@ -1,7 +1,7 @@
 { ... }: {
   programs.foot.settings = {
     main = {
-      font = "JetBrains Mono:size=12";
+      font = "JetBrainsMono Nerd Font Mono:size=12";
       dpi-aware = "yes";
       pad = "12x12";
     };
