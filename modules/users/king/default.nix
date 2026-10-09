@@ -13,9 +13,16 @@
       useUserPackages = true;
       backupFileExtension = "backup";
       users.king = {
-	imports = (with self.modules.homeManager; [ foot sway ]) ++ [
+	imports = (with self.modules.homeManager; [
+	  attrs-base
+	  attrs-development
+	  attrs-graphical
+	  sway
+	]) ++ [
 	  ./config/_foot.nix
 	  ./config/_sway.nix
+	  ./config/_nvim.nix
+	  ./config/_git.nix
 	];
 	home.stateVersion = "26.05";
       };

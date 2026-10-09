@@ -6,9 +6,11 @@
       self.nixosModules.amd
 
       self.nixosModules.attrs-base
+#      self.nixosModules.attrs-development
+      self.nixosModules.attrs-graphical
 
       self.nixosModules.sway
-      self.nixosModules.fonts
+#      self.nixosModules.fonts
       self.nixosModules.boot-systemd-boot
     ];
 
