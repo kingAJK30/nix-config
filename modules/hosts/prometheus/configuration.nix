@@ -4,6 +4,7 @@
       self.nixosModules.prometheusHardware
       self.nixosModules.user-king
       self.nixosModules.amd
+      self.nixosModules.boot-systemd-boot
 
       self.nixosModules.attrs-base
 #      self.nixosModules.attrs-development
@@ -11,7 +12,7 @@
 
       self.nixosModules.sway
 #      self.nixosModules.fonts
-      self.nixosModules.boot-systemd-boot
+      self.nixosModules.steam
     ];
 
     networking.hostName = "prometheus";
