@@ -7,7 +7,7 @@
       self.nixosModules.boot-systemd-boot
 
       self.nixosModules.attrs-base
-#      self.nixosModules.attrs-development
+      self.nixosModules.attrs-development # Causing errors
       self.nixosModules.attrs-graphical
 
       self.nixosModules.sway
