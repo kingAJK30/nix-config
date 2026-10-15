@@ -1,7 +1,9 @@
 { self, inputs, ... }: {
   flake.nixosModules.attrs-development = { pkgs, ... }: {
+    imports = with self.nixosModules; [ llm ];
+
     environment.systemPackages = with pkgs; [
-      cargo
+      wl-clipboard
     ];
   };
 

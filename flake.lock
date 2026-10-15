@@ -199,16 +199,16 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1791699352,
-        "narHash": "sha256-+LWkgYxsh3/Xn+7Ug5XlRxnGTqrc3bK4QvHE0rxhF34=",
+        "lastModified": 1791786962,
+        "narHash": "sha256-VCVQ+ai7cfc4Gd1PaL+kazfeOiSS5amyhUDjlPfN8R0=",
         "owner": "KingAJK30",
         "repo": "rcat",
-        "rev": "ac46d94cdb0272058dc03dd4033d4e5eaee9265e",
+        "rev": "fe62066ec584e69c609d03c2d4fa41c8053de57d",
         "type": "github"
       },
       "original": {
         "owner": "KingAJK30",
-        "ref": "v1.0.0",
+        "ref": "main",
         "repo": "rcat",
         "type": "github"
       }

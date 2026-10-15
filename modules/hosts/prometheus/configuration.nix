@@ -7,12 +7,14 @@
       self.nixosModules.boot-systemd-boot
 
       self.nixosModules.attrs-base
-      self.nixosModules.attrs-development # Causing errors
+      self.nixosModules.attrs-development
       self.nixosModules.attrs-graphical
 
       self.nixosModules.sway
-#      self.nixosModules.fonts
       self.nixosModules.steam
+
+      self.nixosModules.llm
+      self.nixosModules.llm-prometheus
     ];
 
     networking.hostName = "prometheus";
@@ -29,6 +31,6 @@
     nixpkgs.config.allowUnfree = true;
     hardware.enableRedistributableFirmware = true;
 
-    system.stateVersion = "26.05";
+    system.stateVersion = "25.11";
   };
 }

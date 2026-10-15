@@ -26,7 +26,7 @@
 	  ./config/_git.nix
 	  ./config/_rofi.nix
 	];
-	home.stateVersion = "26.05";
+	home.stateVersion = "25.11";
       };
     };
   };

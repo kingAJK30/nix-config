@@ -13,7 +13,7 @@
 
     nixvim.url = "github:nix-community/nixvim/nixos-26.05";
 
-    rcat.url = "github:KingAJK30/rcat/v1.0.0";
+    rcat.url = "github:KingAJK30/rcat/main";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
