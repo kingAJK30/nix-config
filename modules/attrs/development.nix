@@ -8,7 +8,7 @@
   };
 
   flake.modules.homeManager.attrs-development = { pkgs, ... }: {
-    imports = with self.modules.homeManager; [ nvim ];
+    imports = with self.modules.homeManager; [ ];
 
     home.packages = with pkgs; [
       cargo

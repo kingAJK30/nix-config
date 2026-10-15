@@ -8,23 +8,27 @@
       extraGroups = [ "wheel" "networkmanager" ];
     };
 
+
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
       backupFileExtension = "backup";
       users.king = {
+	programs.bash.enable = true;
+
 	imports = (with self.modules.homeManager; [
 	  attrs-base
 	  attrs-development
 	  attrs-graphical
+	  emacs
 	  rofi
 	  sway
 	]) ++ [
 	  ./config/_foot.nix
 	  ./config/_sway.nix
-	  ./config/_nvim.nix
 	  ./config/_git.nix
 	  ./config/_rofi.nix
+	  ./config/_emacs.nix
 	];
 	home.stateVersion = "25.11";
       };
