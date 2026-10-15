@@ -30,3 +30,20 @@
   (setq highlight-indent-guides-method 'character
         highlight-indent-guides-character ?│)
   (add-hook 'prog-mode-hook #'highlight-indent-guides-mode))
+
+
+(use-package! gptel
+  :config
+  (setq gptel-include-reasoning 'ignore)
+
+  (setq gptel-backend
+        (gptel-make-openai "Prometheus-Local"
+          :host "127.0.0.1:8080"
+          :protocol "http"
+          :endpoint "/v1/chat/completions"
+          :stream t
+          :key "not-needed"
+          :models '(Qwen-27B)))
+
+  (setq gptel-model 'Qwen-27B
+        gptel-default-mode 'markdown-mode))

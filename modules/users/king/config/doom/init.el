@@ -40,6 +40,7 @@
  :tools
  (eval +overlay)
  (debugger +lsp)
+ llm
  lookup
  lsp
  magit

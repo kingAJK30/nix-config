@@ -2,6 +2,7 @@
   flake.nixosModules.llm = { pkgs, lib, ... }: {
     environment.systemPackages = [
       pkgs.llama-cpp
+      pkgs.aider-chat
     ];
 
     services.llama-cpp = {
