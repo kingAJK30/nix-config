@@ -10,7 +10,7 @@
         "--models-dir" "/var/lib/models"
         
         "--n-gpu-layers" "99"
-        "--ctx-size" "32768"
+        "--ctx-size" "4096"
         "--cache-type-k" "q8_0"
         "--cache-type-v" "q8_0"
       ];
