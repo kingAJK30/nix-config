@@ -23,6 +23,11 @@
     time.timeZone = "America/Los_Angeles";
     i18n.defaultLocale = "en_US.UTF-8";
 
+    environment.sessionVariables = {
+      OPENAI_API_BASE = "http://127.0.0.1:8080/v1";
+      OPENAI_API_KEY = "not-needed";
+    };
+
     home-manager.users.king.wayland.windowManager.sway.config.output = {
       "DP-2"     = { mode = "1920x1080@239.760Hz"; pos = "0 0"; };
       "HDMI-A-1" = { mode = "1920x1080@74.986Hz";  pos = "1920 0"; };
