@@ -29,12 +29,14 @@
       backupFileExtension = "before-home-manager";
 
       users.aaron = {
-        imports = with self.modules.homeManager; [
+        imports = (with self.modules.homeManager; [
           attrs-base
 	  attrs-development
           emacs
           git
-        ];
+        ]) ++ [
+	  ../../users/king/config/_emacs.nix
+	];
 
         home = {
           username = "aaron";
