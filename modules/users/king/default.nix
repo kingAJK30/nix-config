@@ -22,6 +22,7 @@
       	  emacs
       	  rofi
       	  sway
+          files
       	]) ++ [
       	  ./config/_foot.nix
       	  ./config/_sway.nix
