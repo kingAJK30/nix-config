@@ -1,1 +1,17 @@
 result
+
+.env
+.env.*
+!.env.example
+*.agekey
+*.pem
+*.p12
+*.pfx
+
+*.swp
+*.swo
+*~
+.#*
+
+.DS_Store
+Thumbs.db
