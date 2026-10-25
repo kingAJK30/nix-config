@@ -38,11 +38,17 @@ Rectangle {
         height: parent.height
         color: Colors.base05
     }
+    signal scrolled(string direction)
     signal clicked()
 
     MouseArea {
         anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
-        onClicked: root.clicked()
+        hoverEnabled: true
+        onClicked: cell.clicked()
+
+        onWheel: (wheel) => {
+            let direction = wheel.angleDelta.y > 0 ? "prev" : "next";
+            cell.scrolled(direction);
+        }
     }
 }

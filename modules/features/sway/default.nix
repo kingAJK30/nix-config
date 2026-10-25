@@ -15,6 +15,8 @@
           modifier = lib.mkDefault "Mod4";
           terminal = lib.mkDefault "foot";
 
+          bars = [];
+
           keybindings = lib.mkOptionDefault {
             "${mod}+q" = lib.mkDefault "kill";
             "${mod}+Shift+q" = lib.mkDefault null;

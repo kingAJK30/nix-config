@@ -25,6 +25,32 @@ PanelWindow {
         return Mpris.players.values.length > 0 ? Mpris.players.values[0] : null;
     }
 
+    function switchLocalWorkspace(direction) {
+        let values = I3.workspaces.values || I3.workspaces;
+        if (!values) return;
+
+        let screenWs = [];
+        for (let i = 0; i < values.length; i++) {
+            let ws = values[i];
+            if (ws.monitor && ws.monitor.name === root.screen.name) {
+                screenWs.push(ws);
+            }
+        }
+        if (screenWs.length === 0) return;
+
+        let curIdx = screenWs.findIndex(w => w.focused);
+        if (curIdx === -1) curIdx = 0;
+
+        let targetIdx = curIdx;
+        if (direction === "next") {
+            targetIdx = Math.min(curIdx + 1, screenWs.length - 1);
+        } else {
+            targetIdx = Math.max(curIdx - 1, 0);
+        }
+
+        screenWs[targetIdx].activate();
+    }
+
     RowLayout {
         anchors.fill: parent
         anchors.bottomMargin: 1
@@ -44,6 +70,10 @@ PanelWindow {
                        : "transparent"
 
                 onClicked: modelData.activate()
+                
+                onScrolled: (direction) => {
+                    root.switchLocalWorkspace(direction);
+                }
 
                 Text {
                     text: cell.modelData.number > 0 ? cell.modelData.number : cell.modelData.name
@@ -123,6 +153,7 @@ PanelWindow {
 
             MouseArea {
                 anchors.fill: parent
+                acceptedButtons: Qt.NoButton
                 onWheel: (wheel) => {
                     if (wheel.angleDelta.y > 0) {
                         SystemStats.adjustVolume("2%+");
