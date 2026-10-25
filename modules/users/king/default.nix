@@ -22,7 +22,9 @@
       	  emacs
       	  rofi
       	  sway
+          quickshell
           files
+          colors
       	]) ++ [
       	  ./config/_foot.nix
       	  ./config/_sway.nix

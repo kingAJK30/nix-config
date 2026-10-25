@@ -7,7 +7,7 @@
 
  :ui
  doom
- doom-dashboard
+ dashboard
  hl-todo
  modeline
  ophints
@@ -55,6 +55,7 @@
  (python +lsp)
  (lua +lsp)
  (web +lsp)
+ (qt +qml)
  yaml
 
  :config

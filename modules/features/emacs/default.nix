@@ -11,7 +11,9 @@
     };
 
     home.packages = with pkgs; [
-      ripgrep fd
+      ripgrep
+      fd
+      kdePackages.qtdeclarative
     ];
   };
 }

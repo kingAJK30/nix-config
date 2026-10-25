@@ -20,6 +20,13 @@
 
 (setq display-line-numbers-type 'relative)
 
+(add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-mode))
+
+(add-hook 'qml-mode-hook #'lsp-deferred)
+
+(after! lsp-mode
+  (setq lsp-semantic-tokens-enable t))
+
 (use-package! lsp-ui
   :config
   (setq lsp-ui-sideline-enable t
