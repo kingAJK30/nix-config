@@ -15,7 +15,7 @@
     home.packages = with pkgs; [
       cargo
       tree
-      python312
+      python3
       inputs.rcat.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };

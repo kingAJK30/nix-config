@@ -12,6 +12,7 @@
 
       self.nixosModules.sway
       self.nixosModules.steam
+      self.nixosModules.fpv
 
       self.nixosModules.llm
       self.nixosModules.llm-prometheus
@@ -26,6 +27,18 @@
     environment.sessionVariables = {
       OPENAI_API_BASE = "http://127.0.0.1:8080/v1";
       OPENAI_API_KEY = "not-needed";
+    };
+
+    services.udev.extraRules = ''
+        ACTION!="remove", SUBSYSTEM=="input", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5710", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+        '';
+
+    services.udisks2.enable = true;
+    services.gvfs.enable = true;
+
+    programs.appimage = {
+      enable = true;
+      binfmt = true;
     };
 
     home-manager.users.king.wayland.windowManager.sway.config.output = {

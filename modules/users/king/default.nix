@@ -8,6 +8,8 @@
       extraGroups = [ "wheel" "networkmanager" ];
     };
 
+    boot.kernelModules = [ "joydev" ];
+
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
@@ -25,6 +27,7 @@
           quickshell
           files
           colors
+          fpv
       	]) ++ [
       	  ./config/_foot.nix
       	  ./config/_sway.nix

@@ -6,5 +6,20 @@
 
     xdg.configFile."base16/colors.json".text =
       builtins.toJSON (lib.mapAttrs (_: c: "#${c}") config.my.colors);
+
+    systemd.user.services.quickshell = {
+      Unit = {
+        Description = "Quickshell desktop shell";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.quickshell}/bin/quickshell";
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
   };
 }
