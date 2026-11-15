@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+host="${1:-$(hostname)}"
+
+cd "$root"
+
+sudo nixos-rebuild build --flake ".#$host"

@@ -1,0 +1,67 @@
+{ inputs, config, ... }:
+let
+  features = config.flake.modules.nixos;
+in
+{
+  flake.nixosConfigurations.prometheus = inputs.nixpkgs.lib.nixosSystem {
+    modules = [
+      inputs.home-manager.nixosModules.home-manager
+      features.prometheusHardware
+
+      features.audio
+      features.fonts
+      features.sway
+      features.stylix
+      features.cli
+      features.emacs
+      features.rofi
+      features.foot
+      features.gaming
+      features.engineering
+      features.librewolf
+
+      {
+        # --- identity ---
+        networking.hostName = "prometheus";
+        system.stateVersion = "26.05";
+
+        # --- user ---
+        users.users.king = {
+          isNormalUser = true;
+          extraGroups = [
+            "wheel"
+            "networkmanager"
+          ];
+        };
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          users.king.home.stateVersion = "26.05";
+          users.king.wayland.windowManager.sway.config.output = {
+            "DP-2"     = { mode = "1920x1080@239.760Hz"; pos = "0 0"; };
+            "HDMI-A-1" = { mode = "1920x1080@74.986Hz";  pos = "1920 0"; };
+          };
+        };
+
+        # --- hardware / boot ---
+        boot.loader.systemd-boot.enable = true;
+        boot.loader.efi.canTouchEfiVariables = true;
+        hardware.graphics = {
+          enable = true;
+          enable32Bit = true;
+        };
+        hardware.enableRedistributableFirmware = true;
+
+        # --- basics ---
+        networking.networkmanager.enable = true;
+        time.timeZone = "America/Los_Angeles";
+        i18n.defaultLocale = "en_US.UTF-8";
+        nixpkgs.config.allowUnfree = true;
+        nix.settings.experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+      }
+    ];
+  };
+}

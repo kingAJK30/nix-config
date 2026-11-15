@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+name="${1:-}"
+if [[ ! "$name" =~ ^[a-z][a-z0-9-]*$ ]]; then
+  echo "usage: new-feature <name>   (lowercase letters, digits, hyphens)" >&2
+  exit 1
+fi
+
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+template="$root/modules/features/_template.nix"
+out="$root/modules/features/$name.nix"
+
+if [[ -e "$out" ]]; then
+  echo "error: $out already exists" >&2
+  exit 1
+fi
+
+sed "s/NAME/$name/g" "$template" > "$out"
+
+echo "created modules/features/$name.nix"
