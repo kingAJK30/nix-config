@@ -13,6 +13,7 @@ in
       features.sway
       features.stylix
       features.cli
+      features.git
       features.emacs
       features.rofi
       features.foot

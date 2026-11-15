@@ -7,7 +7,7 @@
     programs.git = {
       enable = true;
 
-      extraConfig = lib.mapAttrs (_: lib.mkDefault) {
+      settings = lib.mapAttrs (_: lib.mkDefault) {
         init.defaultBranch = "main";
         pull.rebase = true;
         push.autoSetupRemote = true;
