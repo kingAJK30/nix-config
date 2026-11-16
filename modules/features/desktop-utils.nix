@@ -16,16 +16,10 @@
     programs.swaylock.enable = true;
     services.swayidle = {
       enable = true;
-      events = [
-        {
-          event = "before-sleep";
-          command = "${pkgs.swaylock}/bin/swaylock -f";
-        }
-        {
-          event = "lock";
-          command = "${pkgs.swaylock}/bin/swaylock -f";
-        }
-      ];
+      events = {
+        before-sleep = "${pkgs.swaylock}/bin/swaylock -f";
+        lock = "${pkgs.swaylock}/bin/swaylock -f";
+      };
       timeouts = [
         {
           timeout = 600;
@@ -45,7 +39,6 @@
       satty
       wl-clipboard
       cliphist
-      wl-paste
     ];
 
     wayland.windowManager.sway.config.startup = [
