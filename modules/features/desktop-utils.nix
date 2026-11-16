@@ -31,6 +31,11 @@
           timeout = 600;
           command = "${pkgs.swaylock}/bin/swaylock -f";
         }
+        {
+          timeout = 900;
+          command = "${pkgs.sway}/bin/swaymsg \"output * power off\"";
+          resumeCommand = "${pkgs.sway}/bin/swaymsg \"output * power on\"";
+        }
       ];
     };
 
@@ -40,6 +45,12 @@
       satty
       wl-clipboard
       cliphist
+      wl-paste
+    ];
+
+    wayland.windowManager.sway.config.startup = [
+      { command = "wl-paste --type text --watch cliphist store"; }
+      { command = "wl-paste --type image --watch cliphist store"; }
     ];
   };
 }
