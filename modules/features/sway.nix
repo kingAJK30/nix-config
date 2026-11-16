@@ -28,7 +28,8 @@
 
             "${cfg.modifier}+n" = lib.mkDefault "exec swaync-client -t -sw";
 
-            "${cfg.modifier}+shift+p" = lib.mkDefault ''exec grim -g "$(slurp)" - | satty --filename - --copy-command wl-copy'';
+            "${cfg.modifier}+shift+p" =
+              lib.mkDefault ''exec grim -g "$(slurp)" - | satty --filename - --copy-command wl-copy'';
           };
         };
       };

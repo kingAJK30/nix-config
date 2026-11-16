@@ -21,12 +21,12 @@
       url = "github:nix-community/nixvim/nixos-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     nix-doom-emacs-unstraightened = {
       url = "github:marienz/nix-doom-emacs-unstraightened";
       inputs.nixpkgs.follows = "";
     };
-    
+
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
     rcat.url = "github:KingAJK30/rcat/main";

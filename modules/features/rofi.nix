@@ -12,8 +12,8 @@
       };
     };
 
-    wayland.windowManager.sway.config.menu =
-      lib.mkIf config.wayland.windowManager.sway.enable
-        (lib.mkDefault "rofi -show drun");
+    wayland.windowManager.sway.config.menu = lib.mkIf config.wayland.windowManager.sway.enable (
+      lib.mkDefault "rofi -show drun"
+    );
   };
 }
