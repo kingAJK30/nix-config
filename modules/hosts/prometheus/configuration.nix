@@ -8,15 +8,23 @@ in
       inputs.home-manager.nixosModules.home-manager
       features.prometheusHardware
 
+      # --- core ---
       features.audio
       features.fonts
-      features.sway
-      features.stylix
       features.cli
       features.git
-      features.emacs
+
+      # --- desktop ---
+      features.sway
       features.rofi
+      features.desktop-utils
+      features.stylix
       features.foot
+
+      # --- development ---
+      features.emacs
+
+      # --- misc ---
       features.gaming
       features.engineering
       features.librewolf

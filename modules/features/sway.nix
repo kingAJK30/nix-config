@@ -20,8 +20,15 @@
 
           keybindings = lib.mkOptionDefault {
             "${cfg.modifier}+q" = lib.mkDefault "kill";
-            "${cfg.modifier}+Shift+q" = lib.mkDefault null;
+            "${cfg.modifier}+shift+q" = lib.mkDefault null;
+
             "${cfg.modifier}+space" = lib.mkDefault "exec ${cfg.menu}";
+
+            "${cfg.modifier}+shift+l" = lib.mkDefault "exec swaylock -f";
+
+            "${cfg.modifier}+n" = lib.mkDefault "exec swaync-client -t -sw";
+
+            "${cfg.modifier}+shift+p" = lib.mkDefault ''exec grim -g "$(slurp)" - | satty --filename - --copy-command wl-copy'';
           };
         };
       };
