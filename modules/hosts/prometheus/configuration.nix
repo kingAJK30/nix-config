@@ -17,6 +17,7 @@ in
       # --- desktop ---
       features.sway
       features.rofi
+      features.waybar
       features.desktop-utils
       features.stylix
       features.foot
