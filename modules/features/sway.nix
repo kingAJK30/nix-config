@@ -24,7 +24,7 @@
 
             "${cfg.modifier}+space" = lib.mkDefault "exec ${cfg.menu}";
 
-            "${cfg.modifier}+shift+l" = lib.mkDefault "exec swaylock -f";
+            "${cfg.modifier}+shift+escape" = lib.mkDefault "exec swaylock -f";
 
             "${cfg.modifier}+n" = lib.mkDefault "exec swaync-client -t -sw";
 

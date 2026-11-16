@@ -46,6 +46,7 @@ in
         home-manager = {
           useGlobalPkgs = true;
           useUserPackages = true;
+          backupFileExtension = "bak";
           users.king.home.stateVersion = "26.05";
 
           users.king.programs.git = {
