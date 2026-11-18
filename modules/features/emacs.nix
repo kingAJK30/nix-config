@@ -1,5 +1,5 @@
 { config, inputs, ... }: {
-  flake.modules.nixos.emacs = { ... }: {
+  flake.modules.nixos.emacs = { pkgs, ... }: {
     nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
     home-manager.sharedModules = [ config.flake.modules.homeManager.emacs ];
   };
@@ -9,7 +9,11 @@
 
     programs.doom-emacs.enable = true;
 
-    services.emacs.enable = lib.mkDefault true;
+    services.emacs = {
+      enable = lib.mkDefault true;
+      startWithUserSession = lib.mkDefault "graphical";
+      client.enable = lib.mkDefault true;
+    };
 
     home.packages = with pkgs; [
       ripgrep
@@ -22,7 +26,9 @@
 
     home.shellAliases = {
       emacs = lib.mkDefault "emacsclient -t";
-      emacsg = lib.mkDefault "emacsclient -c";
+      emacsg = lib.mkDefault "emacsclient -n -r -c";
     };
+
+    programs.bash.enable = true;
   };
 }

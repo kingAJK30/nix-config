@@ -23,7 +23,8 @@ in
       features.foot
 
       # --- development ---
-      features.emacs
+      features.nvim
+      features.ai
 
       # --- misc ---
       features.gaming

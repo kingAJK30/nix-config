@@ -42,6 +42,7 @@
     ];
 
     wayland.windowManager.sway.config.startup = [
+      { command = "systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK"; }
       { command = "wl-paste --type text --watch cliphist store"; }
       { command = "wl-paste --type image --watch cliphist store"; }
     ];

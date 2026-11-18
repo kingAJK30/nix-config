@@ -4,8 +4,8 @@
 
     stylix = {
       enable = true;
-      image = lib.mkDefault ../../wallpapers/space_cabin.jpg;
-      polarity = lib.mkDefault "dark";
+      image = lib.mkDefault ../../wallpapers/mountains_lake.jpg;
+      polarity = lib.mkDefault "light";
 
       fonts = {
         monospace = {
