@@ -16,6 +16,7 @@ in
 
       # --- desktop ---
       features.sway
+      features.ly
       features.rofi
       features.waybar
       features.desktop-utils
@@ -24,7 +25,8 @@ in
 
       # --- development ---
       features.nvim
-      features.ai
+      features.claude
+      features.ollama
 
       # --- misc ---
       features.gaming

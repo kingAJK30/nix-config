@@ -1,9 +1,9 @@
 { config, inputs, ... }: {
-  flake.modules.nixos.ai = { pkgs, ... }: {
-    home-manager.sharedModules = [ config.flake.modules.homeManager.ai ];
+  flake.modules.nixos.claude = { pkgs, ... }: {
+    home-manager.sharedModules = [ config.flake.modules.homeManager.claude ];
   };
 
-  flake.modules.homeManager.ai = { pkgs, lib, ... }: {
+  flake.modules.homeManager.claude = { pkgs, lib, ... }: {
     home.packages = with pkgs; [
       claude-code
       rtk
