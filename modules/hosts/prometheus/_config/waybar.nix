@@ -22,7 +22,7 @@
 
     style = lib.mkAfter ''
       window#waybar {
-        border-bottom: 1px solid currentColor;
+        border: 1px solid currentColor;
       }
 
       #mode,

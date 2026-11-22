@@ -30,6 +30,7 @@ in
       features.starship
       features.thunar
       features.yazi
+      features.borders
 
       # --- development ---
       features.nvim
