@@ -10,11 +10,14 @@ in
       ./_config
 
       # --- core ---
+      features.base
+      features.amd
       features.audio
       features.fonts
       features.cli
       features.git
       features.zsh
+      features.usb
 
       # --- desktop ---
       features.sway
@@ -25,6 +28,8 @@ in
       features.stylix
       features.foot
       features.starship
+      features.thunar
+      features.yazi
 
       # --- development ---
       features.nvim
@@ -79,21 +84,9 @@ in
         # --- hardware / boot ---
         boot.loader.systemd-boot.enable = true;
         boot.loader.efi.canTouchEfiVariables = true;
-        hardware.graphics = {
-          enable = true;
-          enable32Bit = true;
-        };
-        hardware.enableRedistributableFirmware = true;
 
         # --- basics ---
-        networking.networkmanager.enable = true;
         time.timeZone = "America/Los_Angeles";
-        i18n.defaultLocale = "en_US.UTF-8";
-        nixpkgs.config.allowUnfree = true;
-        nix.settings.experimental-features = [
-          "nix-command"
-          "flakes"
-        ];
       }
     ];
   };
