@@ -4,7 +4,7 @@
 
     stylix = {
       enable = true;
-      image = lib.mkDefault ../../wallpapers/mountains_lake.jpg;
+      image = lib.mkDefault ../../wallpapers/bierstadt-among-the-sierra-nevada-mountains.jpg;
       polarity = lib.mkDefault "light";
 
       fonts = {

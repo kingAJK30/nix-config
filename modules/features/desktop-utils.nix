@@ -11,7 +11,6 @@
   };
 
   flake.modules.homeManager.desktop-utils = { pkgs, lib, ... }: {
-    services.swaync.enable = true;
 
     programs.swaylock.enable = true;
     services.swayidle = {

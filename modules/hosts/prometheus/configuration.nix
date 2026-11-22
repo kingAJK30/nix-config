@@ -18,9 +18,11 @@ in
       features.git
       features.zsh
       features.usb
+      features.media
 
       # --- desktop ---
       features.sway
+      features.swaync
       features.ly
       features.rofi
       features.waybar
@@ -31,6 +33,7 @@ in
       features.thunar
       features.yazi
       features.borders
+      features.cursor
 
       # --- development ---
       features.nvim
