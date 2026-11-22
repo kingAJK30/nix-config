@@ -20,9 +20,9 @@
           position = lib.mkDefault "top";
           height = lib.mkDefault 32;
 
-	  margin-top = lib.mkDefault 2;
-	  margin-left = lib.mkDefault 2;
-	  margin-right = lib.mkDefault 2;
+          margin-top = lib.mkDefault 2;
+          margin-left = lib.mkDefault 2;
+          margin-right = lib.mkDefault 2;
 
           modules-left = lib.mkDefault [
             "sway/workspaces"

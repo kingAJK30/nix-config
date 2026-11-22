@@ -3,7 +3,8 @@
     home-manager.sharedModules = [ config.flake.modules.homeManager.borders ];
   };
 
-  flake.modules.homeManager.borders = { config, lib, ... }:
+  flake.modules.homeManager.borders =
+    { config, lib, ... }:
     let
       color = "#${config.lib.stylix.colors.base05}";
       inherit (config.lib.formats.rasi) mkLiteral;
@@ -15,8 +16,14 @@
     in
     {
       wayland.windowManager.sway.config = {
-        window = { border = 1; titlebar = false; };
-        floating = { border = 1; titlebar = false; };
+        window = {
+          border = 1;
+          titlebar = false;
+        };
+        floating = {
+          border = 1;
+          titlebar = false;
+        };
 
         colors = {
           focused = outline;

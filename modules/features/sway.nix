@@ -18,9 +18,9 @@
           terminal = lib.mkDefault "foot";
           bars = lib.mkDefault [ ];
 
-	  window = {
-	    titlebar = false;
-	  };
+          window = {
+            titlebar = false;
+          };
 
           gaps = {
             inner = lib.mkDefault 2;

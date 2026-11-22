@@ -19,7 +19,11 @@
         hide-on-clear = true;
         hide-on-action = true;
 
-        widgets = [ "title" "dnd" "notifications" ];
+        widgets = [
+          "title"
+          "dnd"
+          "notifications"
+        ];
         widget-config = {
           title = {
             text = "NOTIFICATIONS";

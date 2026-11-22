@@ -3,7 +3,8 @@
     home-manager.sharedModules = [ config.flake.modules.homeManager.media ];
   };
 
-  flake.modules.homeManager.media = { lib, ... }:
+  flake.modules.homeManager.media =
+    { lib, ... }:
     let
       assign = app: types: lib.genAttrs types (_: lib.mkDefault app);
     in
@@ -28,13 +29,26 @@
         enable = true;
         defaultApplications =
           assign "mpv.desktop" [
-            "video/mp4" "video/x-matroska" "video/webm" "video/quicktime"
-            "video/x-msvideo" "video/mpeg" "video/ogg"
-            "audio/mpeg" "audio/flac" "audio/ogg" "audio/x-wav" "audio/mp4"
+            "video/mp4"
+            "video/x-matroska"
+            "video/webm"
+            "video/quicktime"
+            "video/x-msvideo"
+            "video/mpeg"
+            "video/ogg"
+            "audio/mpeg"
+            "audio/flac"
+            "audio/ogg"
+            "audio/x-wav"
+            "audio/mp4"
           ]
           // assign "imv.desktop" [
-            "image/png" "image/jpeg" "image/gif" "image/webp"
-            "image/bmp" "image/tiff"
+            "image/png"
+            "image/jpeg"
+            "image/gif"
+            "image/webp"
+            "image/bmp"
+            "image/tiff"
           ]
           // assign "org.pwmt.zathura.desktop" [ "application/pdf" ];
       };
