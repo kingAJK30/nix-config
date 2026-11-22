@@ -3,7 +3,10 @@
     services.udisks2.enable = true;
     services.gvfs.enable = true;
 
-    boot.supportedFilesystems = [ "ntfs" "exfat" ];
+    boot.supportedFilesystems = [
+      "ntfs"
+      "exfat"
+    ];
 
     home-manager.sharedModules = [ config.flake.modules.homeManager.usb ];
   };

@@ -20,21 +20,21 @@
       ];
     };
 
-  style = lib.mkAfter ''
-   window#waybar {
-     border-bottom: 1px solid currentColor;
-   }
+    style = lib.mkAfter ''
+      window#waybar {
+        border-bottom: 1px solid currentColor;
+      }
 
-   #mode,
-   #tray,
-   #pulseaudio,
-   #network,
-   #cpu,
-   #memory,
-   #clock {
-     padding: 0 0.7em;
-     border-left: 1px solid currentColor;
-   }
-  '';
+      #mode,
+      #tray,
+      #pulseaudio,
+      #network,
+      #cpu,
+      #memory,
+      #clock {
+        padding: 0 0.7em;
+        border-left: 1px solid currentColor;
+      }
+    '';
   };
 }

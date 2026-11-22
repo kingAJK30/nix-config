@@ -18,10 +18,10 @@
           terminal = lib.mkDefault "foot";
           bars = lib.mkDefault [ ];
 
-	  gaps = {
-	    inner = lib.mkDefault 2;
-	    outer = lib.mkDefault 0;
-	  };
+          gaps = {
+            inner = lib.mkDefault 2;
+            outer = lib.mkDefault 0;
+          };
 
           keybindings = lib.mkOptionDefault {
             "${cfg.modifier}+q" = lib.mkDefault "kill";
@@ -33,7 +33,8 @@
 
             "${cfg.modifier}+n" = lib.mkDefault "exec swaync-client -t -sw";
 
-            "${cfg.modifier}+shift+p" = lib.mkDefault ''exec grim -g "$(slurp)" - | satty --filename - --copy-command wl-copy'';
+            "${cfg.modifier}+shift+p" =
+              lib.mkDefault ''exec grim -g "$(slurp)" - | satty --filename - --copy-command wl-copy'';
 
             "${cfg.modifier}+shift+v" = lib.mkDefault "cliphist list | rofi -dmenu | cliphist decode | wl-copy";
           };

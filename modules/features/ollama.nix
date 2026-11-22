@@ -6,9 +6,9 @@
 
       loadModels = lib.mkDefault [
         "qwen2.5-coder:3b"
-	"qwen3:8b"
-	"qwen3-vl:8b"
-	"nomic-embed-text"
+        "qwen3:8b"
+        "qwen3-vl:8b"
+        "nomic-embed-text"
       ];
 
       environmentVariables = {
