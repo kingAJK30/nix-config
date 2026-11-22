@@ -3,10 +3,10 @@
     home-manager.sharedModules = [ config.flake.modules.homeManager.waybar ];
   };
 
-  flake.modules.homeManager.waybar = { pkgs, lib, ... }: {
+  flake.modules.homeManager.waybar = { config, pkgs, lib, ... }: {
     programs.waybar = {
       enable = true;
-      systemd.enable = true;
+      systemd.enable = false;
 
       settings.mainBar = {
 	layer = lib.mkDefault "top";
@@ -85,5 +85,8 @@
 	};
       };
     };
+    wayland.windowManager.sway.config.startup = lib.mkIf config.wayland.windowManager.sway.enable [
+      { command = "${config.programs.waybar.package}/bin/waybar"; }
+    ];
   };
 }

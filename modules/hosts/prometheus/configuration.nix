@@ -24,6 +24,7 @@ in
       features.desktop-utils
       features.stylix
       features.foot
+      features.starship
 
       # --- development ---
       features.nvim

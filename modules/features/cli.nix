@@ -10,6 +10,10 @@
       unzip
       wget
       curl
+
+      zoxide
+      fzf
+
       inputs.rcat.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
