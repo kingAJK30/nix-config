@@ -7,6 +7,9 @@
   };
 
   flake.modules.homeManager.zsh = { pkgs, lib, ... }: {
+    programs.fzf.enable = true;
+    programs.zoxide.enable = true;
+
     programs.zsh = {
       enable = true;
       enableCompletion = true;
