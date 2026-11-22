@@ -7,51 +7,82 @@
     programs.waybar = {
       enable = true;
       systemd.enable = true;
-      settings = {
-        mainBar = {
-          layer = "top";
-          position = "top";
-          height = 32;
-          modules-left = [ "sway/workspaces" "sway/mode" ];
-          modules-center = [ "sway/window" ];
-          modules-right = [ "pulseaudio" "network" "cpu" "memory" "clock" ];
 
-          "sway/workspaces" = {
-            disable-scroll = true;
-            all-outputs = true;
-            format = "{name}";
-          };
+      settings.mainBar = {
+	layer = lib.mkDefault "top";
+	position = lib.mkDefault "top";
+	height = lib.mkDefault 32;
 
-          clock = {
-            format = "{:%H:%M - %Y-%m-%d}";
-            tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-          };
+	modules-left = lib.mkDefault [
+	  "sway/workspaces"
+	];
 
-          cpu = {
-            format = "CPU: {usage}%";
-            interval = 5;
-          };
+	modules-center = lib.mkDefault [
+	  
+	];
 
-          memory = {
-            format = "RAM: {percentage}%";
-            interval = 5;
-          };
+	modules-right = lib.mkDefault [
+	  "clock"
+	];
 
-          pulseaudio = {
-            format = "{volume}% {icon}";
-            format-muted = "Muted";
-            format-icons = {
-              default = [ "" "" "" ];
-            };
-            on-click = "pavucontrol";
-          };
+	"sway/workspaces" = {
+	  format = "{name}";
+	  all-outputs = true;
+	};
 
-          network = {
-            format-wifi = "{essid} ({signalStrength}%)";
-            format-ethernet = "Ethernet";
-            format-disconnected = "Disconnected";
-          };
-        };
+	"sway/mode" = {
+	  format = "<span style=\"italic\">{}</span>";
+	};
+
+	"sway/window" = {
+	  max-length = 25;
+	};
+
+	pulseaudio = {
+	  format = "VOL {volume}%";
+	  format-muted = "VOL MUTED";
+	  on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+	};
+
+	network = {
+	  format-wifi = "WIFI {essid} ({signalStrength}%)";
+	  format-ethernet = "ETH";
+	  format-disconnected = "OFFLINE";
+	  tooltip-format = "{ifname}: {ipaddr}/{cidr}";
+	};
+
+	cpu = {
+	  format = "CPU {usage}%";
+          interval = 10;
+	};
+
+	memory = {
+	  format = "RAM {percentage}%";
+	  interval = 10;
+	};
+
+	temperature = {
+	  critical-threshold = 80;
+	  format = "TEMP {temperatureC}C";
+	};
+
+	battery = {
+	  states = {
+	    warning = 20;
+	    critical = 15;
+	  };
+	  format = "BATT {capacity}%";
+	  format-charging = "BATT CHG {capacity}%";
+	};
+
+	tray = {
+	  spacing = 8;
+	};
+
+	clock = {
+	  format = "{:%H:%M}";
+	  tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+	};
       };
     };
   };

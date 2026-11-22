@@ -7,12 +7,14 @@ in
     modules = [
       inputs.home-manager.nixosModules.home-manager
       features.prometheusHardware
+      ./_config
 
       # --- core ---
       features.audio
       features.fonts
       features.cli
       features.git
+      features.zsh
 
       # --- desktop ---
       features.sway

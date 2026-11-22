@@ -18,6 +18,11 @@
           terminal = lib.mkDefault "foot";
           bars = lib.mkDefault [ ];
 
+	  gaps = {
+	    inner = lib.mkDefault 2;
+	    outer = lib.mkDefault 0;
+	  };
+
           keybindings = lib.mkOptionDefault {
             "${cfg.modifier}+q" = lib.mkDefault "kill";
             "${cfg.modifier}+shift+q" = lib.mkDefault null;

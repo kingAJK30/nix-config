@@ -19,6 +19,7 @@
 
     nixvim = {
       url = "github:nix-community/nixvim/nixos-26.05";
+      inputs.nixpkgs.url = "github:NixOS/nixpkgs/c56a87d8e41ce69bd2af57eb35dcc117a9dfca33";
     };
 
     nix-doom-emacs-unstraightened = {
