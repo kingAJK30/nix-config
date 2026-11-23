@@ -4,7 +4,12 @@
   };
 
   flake.modules.homeManager.quickshell =
-    { config, lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       color = config.lib.stylix.colors.withHashtag;
       font = config.stylix.fonts;
@@ -15,10 +20,9 @@
     {
       home.packages = [ pkgs.quickshell ];
 
-      wayland.windowManager.sway.config.startup =
-	lib.mkIf config.wayland.windowManager.sway.enable [
-	  { command = "${pkgs.quickshell}/bin/quickshell"; }
-	]; 
+      wayland.windowManager.sway.config.startup = lib.mkIf config.wayland.windowManager.sway.enable [
+        { command = "${pkgs.quickshell}/bin/quickshell"; }
+      ];
 
       xdg.configFile."quickshell".source = config.lib.file.mkOutOfStoreSymlink configDir;
 
