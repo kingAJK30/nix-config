@@ -29,7 +29,10 @@
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
-    rcat.url = "github:KingAJK30/rcat/main";
+    rcat = {
+      url = "github:KingAJK30/rcat/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
 

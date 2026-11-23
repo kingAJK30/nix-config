@@ -63,26 +63,6 @@ in
           useUserPackages = true;
           backupFileExtension = "bak";
           users.king.home.stateVersion = "26.05";
-
-          users.king.programs.git = {
-            settings = {
-              user = {
-                name = "KingAJK30";
-                email = "86845258+kingAJK30@users.noreply.github.com";
-              };
-            };
-          };
-
-          users.king.wayland.windowManager.sway.config.output = {
-            "DP-2" = {
-              mode = "1920x1080@239.760Hz";
-              pos = "0 0";
-            };
-            "HDMI-A-1" = {
-              mode = "1920x1080@74.986Hz";
-              pos = "1920 0";
-            };
-          };
         };
 
         # --- hardware / boot ---

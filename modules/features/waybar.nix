@@ -95,7 +95,25 @@
             tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
           };
         };
+
+        style = lib.mkAfter ''
+          window#waybar {
+            border: 1px solid currentColor;
+          }
+
+          #mode,
+          #tray,
+          #pulseaudio,
+          #network,
+          #cpu,
+          #memory,
+          #clock {
+            padding: 0 0.7em;
+            border-left: 1px solid currentColor;
+          }
+        '';
       };
+
       wayland.windowManager.sway.config.startup = lib.mkIf config.wayland.windowManager.sway.enable [
         { command = "${config.programs.waybar.package}/bin/waybar"; }
       ];
