@@ -11,6 +11,7 @@ in
 
       # --- core ---
       features.base
+      features.polkit
       features.amd
       features.audio
       features.fonts
