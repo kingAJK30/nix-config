@@ -67,6 +67,10 @@
                 "typescriptreact"
               ];
             };
+	    qmlls = {
+	      enable = true;
+	      rootMarkers = [ "shell.qml" ".qmlls.ini" ".git" ];
+	    };
             pyright.enable = true;
             clangd.enable = true;
             gopls.enable = true;

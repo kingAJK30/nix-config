@@ -35,6 +35,7 @@ in
       features.yazi
       features.borders
       features.cursor
+      features.quickshell
 
       # --- development ---
       features.nvim
