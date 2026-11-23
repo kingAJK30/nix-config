@@ -34,6 +34,14 @@
         nixfmt
       ];
 
+      autoCmd = [
+        {
+          event = "FileType";
+          pattern = "qml";
+          command = "setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab";
+        }
+      ];
+
       plugins = {
         web-devicons.enable = true;
         lualine.enable = true;

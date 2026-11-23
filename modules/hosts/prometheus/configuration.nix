@@ -26,7 +26,6 @@ in
       features.swaync
       features.ly
       features.rofi
-      features.waybar
       features.desktop-utils
       features.stylix
       features.foot
