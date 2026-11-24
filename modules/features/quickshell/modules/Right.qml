@@ -9,7 +9,7 @@ Island {
     BarText { text: "CPU " + Stats.cpu + "%" }
     BarText { text: "RAM " + Stats.ramUsedGb.toFixed(1) + "G" }
     BarText {
-        visible: Stats.gpuPath !== ""
+        visible: Stats.hasGpu
         text: "GPU " + Stats.gpu + "% " + Stats.vramUsedGb.toFixed(1) + "/" + Math.round(Stats.vramTotalGb) + "G"
     }
     Clock {}

@@ -1,12 +1,22 @@
 singleton Theme 1.0 Theme.qml
 singleton Stats 1.0 Stats.qml
+singleton Dock 1.0 Dock.qml
+singleton OllamaConfig 1.0 OllamaConfig.qml
 BarText 1.0 BarText.qml
+BarItem 1.0 BarItem.qml
+Divider 1.0 Divider.qml
+ThemedText 1.0 ThemedText.qml
+RestartableProcess 1.0 RestartableProcess.qml
 Volume 1.0 Volume.qml
 Tray 1.0 Tray.qml
 WindowTitle 1.0 WindowTitle.qml
 Workspaces 1.0 Workspaces.qml
 Island 1.0 Island.qml
 Clock 1.0 Clock.qml
+Equalizer 1.0 Equalizer.qml
+Toast 1.0 Toast.qml
+Launcher 1.0 Launcher.qml
+AskOllama 1.0 AskOllama.qml
 Left 1.0 Left.qml
 Center 1.0 Center.qml
 Right 1.0 Right.qml

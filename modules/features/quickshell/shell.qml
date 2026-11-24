@@ -3,5 +3,9 @@ import Quickshell
 import "modules"
 
 ShellRoot {
-    Bar {}
+    Variants {
+        model: Quickshell.screens
+
+        Bar {}
+    }
 }

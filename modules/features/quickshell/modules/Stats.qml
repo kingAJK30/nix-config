@@ -12,6 +12,7 @@ Singleton {
     property real vramUsedGb: 0
     property real vramTotalGb: 0
 
+    property bool hasGpu: false
     property string gpuPath: ""
     property real prevTotal: 0
     property real prevIdle: 0
@@ -44,7 +45,10 @@ Singleton {
             "for d in /sys/class/drm/card*/device; do [ -r $d/mem_info_vram_total ] || continue; echo \"$(cat $d/mem_info_vram_total) $d\"; done | sort -n | tail -n1 | cut -d' ' -f2"
         ]
         stdout: StdioCollector {
-            onStreamFinished: root.gpuPath = text.trim()
+            onStreamFinished: {
+                root.gpuPath = text.trim()
+                root.hasGpu = root.gpuPath !== ""
+            }
         }
     }
 

@@ -27,7 +27,9 @@
             "${cfg.modifier}+q" = lib.mkDefault "kill";
             "${cfg.modifier}+shift+q" = lib.mkDefault null;
 
-            "${cfg.modifier}+space" = lib.mkDefault "exec ${cfg.menu}";
+	    "${cfg.modifier}+space" = lib.mkDefault "exec quickshell ipc call launcher open";
+
+	    "${cfg.modifier}+a" = lib.mkDefault "exec quickshell ipc call ask open";
 
             "${cfg.modifier}+shift+escape" = lib.mkDefault "exec swaylock -f";
 

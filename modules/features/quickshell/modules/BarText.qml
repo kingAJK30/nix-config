@@ -1,6 +1,6 @@
 import QtQuick
 
-Item {
+BarItem {
     id: root
     property alias text: label.text
     property color textColor: Theme.fg
@@ -9,21 +9,11 @@ Item {
     signal scrolled(int delta)
 
     width: label.implicitWidth + 24
-    height: parent ? parent.height : 0
 
-    // left divider
-    Rectangle {
-        width: 1
-        height: parent.height
-        color: Theme.border
-    }
-
-    Text {
+    ThemedText {
         id: label
         anchors.centerIn: parent
         color: root.textColor
-        font.family: Theme.font
-        font.pointSize: Theme.fontSize
     }
 
     MouseArea {

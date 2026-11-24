@@ -2,20 +2,12 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.SystemTray
 
-Item {
+BarItem {
     id: root
     required property var hostWindow
 
     visible: SystemTray.items.values.length > 0
     width: visible ? row.implicitWidth + 24 : 0
-    height: parent ? parent.height : 0
-
-    // left divider
-    Rectangle {
-        width: 1
-        height: parent.height
-        color: Theme.border
-    }
 
     Row {
         id: row

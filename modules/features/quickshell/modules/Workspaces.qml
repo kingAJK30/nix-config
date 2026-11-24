@@ -18,12 +18,10 @@ Row {
             height: parent.height
             color: modelData.focused ? Theme.fg : "transparent"
 
-            Text {
+            ThemedText {
                 id: label
                 anchors.centerIn: parent
                 text: ws.modelData.name
-                font.family: Theme.font
-                font.pointSize: Theme.fontSize
                 font.bold: ws.modelData.active
                 color: ws.modelData.focused ? Theme.bg
                      : ws.modelData.urgent ? Theme.accent
