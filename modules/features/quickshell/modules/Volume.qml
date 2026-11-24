@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Services.Pipewire
+import "../components"
 
 BarText {
     id: root

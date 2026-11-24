@@ -1,4 +1,6 @@
 import QtQuick
+import "../components"
+import "../services"
 
 Island {
     id: root

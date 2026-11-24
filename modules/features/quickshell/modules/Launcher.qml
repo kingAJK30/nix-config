@@ -1,15 +1,16 @@
 import QtQuick
 import Quickshell
-import Quickshell.Widgets
+import "../components"
+import "../services"
 
 Item {
     id: root
 
-    function focusInput() { input.forceActiveFocus() }
+    function focusInput() { search.focusInput() }
 
     readonly property var entries: {
         const all = DesktopEntries.applications.values.filter(e => !e.noDisplay)
-        const q = input.text.toLowerCase()
+        const q = search.text.toLowerCase()
         const filtered = q === "" ? all : all.filter(e =>
             e.name.toLowerCase().includes(q) || e.genericName.toLowerCase().includes(q))
         return filtered.slice(0, 8)
@@ -21,37 +22,26 @@ Item {
     readonly property int inset: 6
 
     implicitWidth: 280
-    implicitHeight: inputBox.height + list.height + 8
+    implicitHeight: column.implicitHeight + root.inset * 2
 
     Column {
+        id: column
         width: root.width - root.inset * 2
+        anchors.top: parent.top
+        anchors.topMargin: root.inset
         anchors.horizontalCenter: parent.horizontalCenter
         spacing: 4
 
-        Item {
-            id: inputBox
+        SearchInput {
+            id: search
             width: parent.width
-            height: 32
 
-            TextInput {
-                id: input
-                anchors.fill: parent
-                anchors.leftMargin: 10
-                anchors.rightMargin: 10
-                verticalAlignment: TextInput.AlignVCenter
-                color: Theme.fg
-                font.family: Theme.font
-                font.pointSize: Theme.fontSize
-                focus: true
-                Component.onCompleted: forceActiveFocus()
-
-                Keys.onDownPressed: root.selected = Math.min(root.selected + 1, root.entries.length - 1)
-                Keys.onUpPressed: root.selected = Math.max(root.selected - 1, 0)
-                Keys.onReturnPressed: {
-                    if (root.entries[root.selected]) {
-                        root.entries[root.selected].execute()
-                        Dock.closePinned()
-                    }
+            onDownPressed: root.selected = Math.min(root.selected + 1, root.entries.length - 1)
+            onUpPressed: root.selected = Math.max(root.selected - 1, 0)
+            onAccepted: {
+                if (root.entries[root.selected]) {
+                    root.entries[root.selected].execute()
+                    Dock.closePinned()
                 }
             }
         }
@@ -77,23 +67,17 @@ Item {
                     height: 28
                     color: index === root.selected ? Theme.surface : "transparent"
 
-                    Row {
+                    Behavior on color { ColorAnimation { duration: Theme.motionMicro; easing.type: Theme.snapEasing } }
+
+                    ThemedText {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
+                        anchors.right: parent.right
                         anchors.leftMargin: 10
-                        spacing: 8
-
-                        IconImage {
-                            implicitSize: 18
-                            anchors.verticalCenter: parent.verticalCenter
-                            source: Quickshell.iconPath(modelData.icon, "")
-                        }
-
-                        ThemedText {
-                            anchors.verticalCenter: parent.verticalCenter
-                            text: modelData.name
-                            color: Theme.fg
-                        }
+                        anchors.rightMargin: 10
+                        text: modelData.name
+                        color: Theme.fg
+                        elide: Text.ElideRight
                     }
 
                     MouseArea {

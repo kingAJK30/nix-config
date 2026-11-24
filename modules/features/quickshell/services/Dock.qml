@@ -7,7 +7,13 @@ Singleton {
     id: root
 
     property string mode: "idle" // idle | toast | launcher | ask
-    readonly property bool pinned: mode === "launcher" || mode === "ask"
+
+    // The one explicit list of which modes pin to the focused screen and
+    // suppress toast draining while open (see isActiveForScreen in
+    // Center.qml) — toast is the only mode left out, since it's ambient
+    // and shows on every screen.
+    readonly property var pinnedModes: ["launcher", "ask"]
+    readonly property bool pinned: pinnedModes.includes(mode)
 
     // Name of the sway output that was focused at the moment a pinned mode
     // was requested, so only that monitor's Center expands to show it.
@@ -68,36 +74,20 @@ Singleton {
         id: toastTimer
         interval: 3000
         onTriggered: {
+            // mode flips first, which unmounts Center's Loader-held Toast
+            // item; only then clear currentToast. Toast.qml's `toast` is a
+            // live binding to currentToast, not a one-time snapshot — null
+            // it while the item is still mounted and its own property
+            // bindings (urgency, appName, ...) read through a null toast
+            // for the instant before mode change unmounts it.
+            root.mode = "idle"
             root.currentToast = null
             root.drain()
         }
     }
 
-    Process {
-        running: true
-        command: ["busctl", "--user", "monitor", "--json=short", "org.freedesktop.Notifications"]
-        stdout: SplitParser {
-            onRead: line => {
-                let msg
-                try { msg = JSON.parse(line) } catch (e) { return }
-                if (msg.type !== "method_call") return
-                if (msg.interface !== "org.freedesktop.Notifications") return
-                if (msg.member !== "Notify") return
-
-                const d = msg.payload.data
-                const hints = d[6] || {}
-                const urgency = hints.urgency ? hints.urgency.data : 1
-
-                Quickshell.execDetached(["swaync-client", "--hide-all"])
-                root.pushToast({
-                    appName: d[0],
-                    icon: d[2],
-                    summary: d[3],
-                    body: d[4],
-                    urgency: urgency
-                })
-            }
-        }
+    NotificationWatcher {
+        onNotified: toast => root.pushToast(toast)
     }
 
     IpcHandler {

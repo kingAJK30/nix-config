@@ -15,6 +15,25 @@ Singleton {
     readonly property color green: adapter.colors.green
     readonly property string font: adapter.fonts.mono
     readonly property int fontSize: adapter.fonts.size
+    readonly property int rowHeight: 32
+
+    // Shared motion profile: one mechanical "robot" language for every
+    // animation in the bar. micro = color/toggle snaps, macro = size/position
+    // moves. Sharp, no overshoot everywhere — anything here can fire
+    // repeatedly in quick succession (bars, typing, streaming text), and
+    // overshoot compounding across rapid changes reads as shaking.
+    readonly property int motionMicro: 140
+    readonly property int motionMacro: 220
+    readonly property int snapEasing: Easing.OutExpo
+
+    // ASCII density ramp shared by every text-based visual accent (cava
+    // equalizer, AskOllama's thinking indicator) so they read as one
+    // consistent typographic language and can be retuned in one place.
+    readonly property string asciiRamp: " .:-=+*#%@"
+    function rampChar(fraction) {
+        const idx = Math.min(asciiRamp.length - 1, Math.max(0, Math.floor(fraction * (asciiRamp.length - 1))))
+        return asciiRamp[idx]
+    }
 
     FileView {
         path: Qt.resolvedUrl("../theme.json")

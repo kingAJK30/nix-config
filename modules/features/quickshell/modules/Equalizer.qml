@@ -1,50 +1,54 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import "../components"
+import "../services"
 
 // Idle-state hint: a real audio equalizer driven by cava, reacting to
-// whatever's actually playing. Sharp-edged bars only, no curves.
+// whatever's actually playing — rendered as a single line of ASCII density
+// characters rather than shapes, so the whole bar stays purely typographic.
+//
+// cava can exit immediately if pipewire isn't up yet (e.g. right after
+// login/reboot); when a Process dies, Quickshell clears its `running`
+// property from the native side, which silently breaks a declarative
+// `running: !paused` binding and leaves the visualizer dead forever. So
+// cava is driven imperatively via RestartableProcess and retried on exit.
 Item {
     id: root
 
     property bool paused: false
 
     readonly property int count: 16
-    readonly property int barWidth: 6
-    readonly property int spacing: 2
-    readonly property int baseHeight: 2
-    readonly property int amplitude: 24
 
     property var levels: new Array(count).fill(0)
 
+    readonly property string display: {
+        let s = ""
+        for (let i = 0; i < count; i++) s += Theme.rampChar((levels[i] ?? 0) / 100)
+        return s
+    }
+
     x: (parent ? parent.width : 0) / 2 - width / 2
-    width: count * barWidth + (count - 1) * spacing
-    height: baseHeight + amplitude
+    width: label.implicitWidth
+    height: label.implicitHeight
 
     visible: !paused
 
-    Row {
-        anchors.bottom: parent.bottom
-        spacing: root.spacing
-
-        Repeater {
-            model: root.count
-
-            Rectangle {
-                required property int index
-
-                width: root.barWidth
-                height: root.baseHeight + root.amplitude * (root.levels[index] ?? 0) / 100
-                anchors.bottom: parent.bottom
-                color: Theme.accent
-
-                Behavior on height { NumberAnimation { duration: 90; easing.type: Easing.OutQuad } }
-            }
-        }
+    onPausedChanged: {
+        if (paused) cava.running = false
+        else cava.restart()
     }
 
-    Process {
-        running: !root.paused
+    Component.onCompleted: if (!paused) cava.restart()
+
+    ThemedText {
+        id: label
+        text: root.display
+        color: Theme.fg
+    }
+
+    RestartableProcess {
+        id: cava
         command: ["cava", "-p", Quickshell.shellPath("modules/cava.conf")]
         stdout: SplitParser {
             onRead: line => {
@@ -52,5 +56,12 @@ Item {
                 if (parts.length === root.count) root.levels = parts.map(Number)
             }
         }
+        onExited: retryTimer.restart()
+    }
+
+    Timer {
+        id: retryTimer
+        interval: 1000
+        onTriggered: if (!root.paused) cava.restart()
     }
 }

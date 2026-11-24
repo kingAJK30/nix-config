@@ -1,6 +1,8 @@
 import QtQuick
 import Quickshell
 import Quickshell.I3
+import "../components"
+import "../services"
 
 Row {
     height: parent ? parent.height : 0
@@ -18,6 +20,8 @@ Row {
             height: parent.height
             color: modelData.focused ? Theme.fg : "transparent"
 
+            Behavior on color { ColorAnimation { duration: Theme.motionMicro; easing.type: Theme.snapEasing } }
+
             ThemedText {
                 id: label
                 anchors.centerIn: parent
@@ -26,6 +30,8 @@ Row {
                 color: ws.modelData.focused ? Theme.bg
                      : ws.modelData.urgent ? Theme.accent
                      : Theme.fg
+
+                Behavior on color { ColorAnimation { duration: Theme.motionMicro; easing.type: Theme.snapEasing } }
             }
 
             MouseArea {

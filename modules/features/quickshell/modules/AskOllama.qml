@@ -1,10 +1,12 @@
 import QtQuick
 import Quickshell.Io
+import "../components"
+import "../services"
 
 Item {
     id: root
 
-    function focusInput() { input.forceActiveFocus() }
+    function focusInput() { search.focusInput() }
 
     readonly property int maxResponseHeight: 160
 
@@ -14,8 +16,8 @@ Item {
     readonly property bool thinking: streaming && response === ""
 
     implicitWidth: 320
-    implicitHeight: inputBox.height
-        + (thinking ? 8 + 16 : 0)
+    implicitHeight: search.implicitHeight
+        + (thinking ? 8 + thinkingRow.implicitHeight : 0)
         + (response !== "" ? 8 + Math.min(responseText.implicitHeight, maxResponseHeight) : 0)
         + 16
 
@@ -42,54 +44,36 @@ Item {
         width: root.width
         spacing: 8
 
-        Item {
-            id: inputBox
+        SearchInput {
+            id: search
             width: root.width
-            height: 32
-
-            TextInput {
-                id: input
-                anchors.fill: parent
-                anchors.leftMargin: 10
-                anchors.rightMargin: 10
-                verticalAlignment: TextInput.AlignVCenter
-                color: Theme.fg
-                font.family: Theme.font
-                font.pointSize: Theme.fontSize
-                focus: true
-                Component.onCompleted: forceActiveFocus()
-
-                Keys.onReturnPressed: {
-                    if (text !== "") root.submit(text)
-                }
-            }
+            onAccepted: if (text !== "") root.submit(text)
         }
 
         Row {
             id: thinkingRow
             visible: root.thinking
             x: 10
-            height: 16
-            spacing: 5
+            spacing: 4
 
             Repeater {
                 model: 3
 
-                Rectangle {
+                ThemedText {
+                    id: dot
                     required property int index
+                    property real level: 0
 
-                    width: 6
-                    height: 6
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: Theme.accent
+                    text: Theme.rampChar(level)
+                    color: Theme.fg
 
-                    SequentialAnimation on height {
+                    SequentialAnimation on level {
                         loops: Animation.Infinite
                         running: thinkingRow.visible
-                        PauseAnimation { duration: index * 120 }
-                        NumberAnimation { to: 16; duration: 220; easing.type: Easing.OutQuad }
-                        NumberAnimation { to: 6; duration: 220; easing.type: Easing.InQuad }
-                        PauseAnimation { duration: (2 - index) * 120 }
+                        PauseAnimation { duration: dot.index * 120 }
+                        NumberAnimation { to: 1; duration: Theme.motionMacro; easing.type: Theme.snapEasing }
+                        NumberAnimation { to: 0; duration: Theme.motionMacro; easing.type: Theme.snapEasing }
+                        PauseAnimation { duration: (2 - dot.index) * 120 }
                     }
                 }
             }

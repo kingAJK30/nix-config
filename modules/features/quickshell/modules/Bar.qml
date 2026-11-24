@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import "../services"
 
 PanelWindow {
     id: win
@@ -9,7 +10,7 @@ PanelWindow {
     screen: modelData
 
     readonly property real sideWidth: Math.max(left.naturalWidth, right.naturalWidth)
-    readonly property int rowHeight: 32
+    readonly property int rowHeight: Theme.rowHeight
 
     anchors {
         top: true

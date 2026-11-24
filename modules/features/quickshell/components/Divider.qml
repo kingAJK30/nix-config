@@ -1,4 +1,5 @@
 import QtQuick
+import "../services"
 
 Rectangle {
     width: 1

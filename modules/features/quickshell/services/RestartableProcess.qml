@@ -11,6 +11,8 @@ Item {
     property alias stdout: proc.stdout
     property alias running: proc.running
 
+    signal exited(int exitCode, int exitStatus)
+
     function restart(newCommand) {
         if (newCommand !== undefined) proc.command = newCommand
         proc.running = false
@@ -19,6 +21,7 @@ Item {
 
     Process {
         id: proc
+        onExited: (exitCode, exitStatus) => root.exited(exitCode, exitStatus)
     }
 
     Timer {

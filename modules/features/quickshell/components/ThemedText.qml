@@ -1,4 +1,5 @@
 import QtQuick
+import "../services"
 
 Text {
     font.family: Theme.font

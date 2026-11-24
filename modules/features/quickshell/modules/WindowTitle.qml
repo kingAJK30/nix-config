@@ -1,5 +1,7 @@
 import QtQuick
 import Quickshell.Wayland
+import "../components"
+import "../services"
 
 BarItem {
     id: root

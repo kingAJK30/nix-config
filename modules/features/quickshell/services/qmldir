@@ -1,0 +1,6 @@
+singleton Theme 1.0 Theme.qml
+singleton Stats 1.0 Stats.qml
+singleton Dock 1.0 Dock.qml
+singleton OllamaConfig 1.0 OllamaConfig.qml
+RestartableProcess 1.0 RestartableProcess.qml
+NotificationWatcher 1.0 NotificationWatcher.qml
