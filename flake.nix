@@ -34,6 +34,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    quickshell-config = {
+      url = "github:KingAJK30/quickshell";
+    };
+
   };
 
   outputs =

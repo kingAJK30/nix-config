@@ -1,5 +1,5 @@
 { ... }: {
   home-manager.sharedModules = [
-    ({ config, ... }: { ollamaChatModel = "qwen3:8b"; })
+    ({ config, ... }: { programs.quickshell.ollamaChatModel = "qwen3:8b"; })
   ];
 }

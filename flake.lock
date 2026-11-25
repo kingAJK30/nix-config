@@ -485,6 +485,21 @@
         "type": "github"
       }
     },
+    "quickshell-config": {
+      "locked": {
+        "lastModified": 1795581605,
+        "narHash": "sha256-uqxJo/Du7cvkZkluY+3vJvfrKxkpHuY4sSddpKREX8o=",
+        "owner": "KingAJK30",
+        "repo": "quickshell",
+        "rev": "9bdc94af5d8a87bb9cda06bbd8196210e85f5f88",
+        "type": "github"
+      },
+      "original": {
+        "owner": "KingAJK30",
+        "repo": "quickshell",
+        "type": "github"
+      }
+    },
     "rcat": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -517,6 +532,7 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
+        "quickshell-config": "quickshell-config",
         "rcat": "rcat",
         "stylix": "stylix"
       }
