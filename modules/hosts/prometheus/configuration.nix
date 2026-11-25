@@ -23,7 +23,6 @@ in
 
       # --- desktop ---
       features.sway
-      features.swaync
       features.ly
       features.rofi
       features.desktop-utils

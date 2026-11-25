@@ -1,23 +1,25 @@
 pragma Singleton
 import QtQuick
 import Quickshell
+import Quickshell.Io
 
-// swaync's do-not-disturb flag, polled via `swaync-client` — swaync stays
-// the real notification daemon (see NotificationWatcher.qml), this only
-// mirrors and toggles its dnd state.
+// DND is quickshell's own local flag now (previously mirrored from
+// swaync's). The IpcHandler lets sway's mod+n bind it directly, since
+// there's no Dock-pinned mode to piggyback on (DND is a toggle, not a
+// dynamic-island mode).
 Singleton {
     id: root
 
     property bool enabled: false
 
     function toggle() {
-        poller.mutate(["swaync-client", "--toggle-dnd"])
+        root.enabled = !root.enabled
     }
 
-    PolledShellValue {
-        id: poller
-        interval: 1500
-        pollCommand: ["swaync-client", "--get-dnd"]
-        onParsed: text => root.enabled = text.trim() === "true"
+    IpcHandler {
+        target: "dnd"
+        function toggle(): void {
+            root.toggle()
+        }
     }
 }

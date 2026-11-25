@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Widgets
+import Quickshell.Services.Notifications
 import "../components"
 import "../services"
 
@@ -10,8 +11,8 @@ Item {
     required property var toast
 
     // Read by Center.qml to tint the island's border for notification urgency.
-    readonly property color borderColor: toast.urgency === 2 ? Theme.red
-        : toast.urgency === 0 ? Theme.dim
+    readonly property color borderColor: toast.urgency === NotificationUrgency.Critical ? Theme.red
+        : toast.urgency === NotificationUrgency.Low ? Theme.dim
         : Theme.border
 
     readonly property int maxTextWidth: 360

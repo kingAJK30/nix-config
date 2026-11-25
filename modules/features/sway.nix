@@ -37,7 +37,7 @@
 
 	    "${cfg.modifier}+Escape" = lib.mkDefault "exec quickshell ipc call session open";
 
-            "${cfg.modifier}+n" = lib.mkDefault "exec swaync-client -t -sw";
+            "${cfg.modifier}+n" = lib.mkDefault "exec quickshell ipc call dnd toggle";
 
             "${cfg.modifier}+shift+p" =
               lib.mkDefault ''exec grim -g "$(slurp)" - | satty --filename - --copy-command wl-copy'';
