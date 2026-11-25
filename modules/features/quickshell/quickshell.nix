@@ -1,6 +1,10 @@
 { config, ... }: {
   flake.modules.nixos.quickshell = { ... }: {
     home-manager.sharedModules = [ config.flake.modules.homeManager.quickshell ];
+
+    # Needed for the control center's Bluetooth toggle (services/Bluetooth.qml):
+    # provides bluetoothd and the bluetoothctl binary it polls.
+    hardware.bluetooth.enable = true;
   };
 
   flake.modules.homeManager.quickshell =
@@ -43,6 +47,7 @@
         xdg.configFile."quickshell".source = config.lib.file.mkOutOfStoreSymlink configDir;
 
         home.file."${lib.removePrefix "${home}/" configDir}/theme.json".text = builtins.toJSON {
+          wallpaper = toString config.stylix.image;
           colors = {
             bg = color.base00;
             surface = color.base01;

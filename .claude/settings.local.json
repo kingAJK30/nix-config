@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Read(//home/king/.claude/skills/**)",
-      "WebFetch(domain:quickshell.org)"
+      "WebFetch(domain:quickshell.org)",
+      "WebSearch"
     ]
   }
 }

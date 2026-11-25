@@ -16,9 +16,6 @@ Item {
         return filtered.slice(0, 8)
     }
 
-    property int selected: 0
-    onEntriesChanged: selected = 0
-
     readonly property int inset: 6
 
     implicitWidth: 280
@@ -36,14 +33,9 @@ Item {
             id: search
             width: parent.width
 
-            onDownPressed: root.selected = Math.min(root.selected + 1, root.entries.length - 1)
-            onUpPressed: root.selected = Math.max(root.selected - 1, 0)
-            onAccepted: {
-                if (root.entries[root.selected]) {
-                    root.entries[root.selected].execute()
-                    Dock.closePinned()
-                }
-            }
+            onDownPressed: list.moveDown()
+            onUpPressed: list.moveUp()
+            onAccepted: list.activateSelected()
         }
 
         Rectangle {
@@ -52,43 +44,12 @@ Item {
             color: Theme.border
         }
 
-        Column {
+        SelectableList {
             id: list
             width: parent.width
-
-            Repeater {
-                model: root.entries
-
-                Rectangle {
-                    required property var modelData
-                    required property int index
-
-                    width: list.width
-                    height: 28
-                    color: index === root.selected ? Theme.surface : "transparent"
-
-                    Behavior on color { ColorAnimation { duration: Theme.motionMicro; easing.type: Theme.snapEasing } }
-
-                    ThemedText {
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.leftMargin: 10
-                        anchors.rightMargin: 10
-                        text: modelData.name
-                        color: Theme.fg
-                        elide: Text.ElideRight
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            modelData.execute()
-                            Dock.closePinned()
-                        }
-                    }
-                }
-            }
+            model: root.entries
+            labelFor: e => e.name
+            activate: e => { e.execute(); Dock.closePinned() }
         }
     }
 }

@@ -9,8 +9,8 @@ import Quickshell.Io
 // time via swaync-client.
 //
 // A toast record is: { appName: string, icon: string, summary: string,
-// body: string, urgency: int (0 low, 1 normal, 2 critical) }. Toast.qml
-// is the other side of this contract.
+// body: string, urgency: int (0 low, 1 normal, 2 critical) }.
+// NotificationToast.qml is the other side of this contract.
 Item {
     id: root
 

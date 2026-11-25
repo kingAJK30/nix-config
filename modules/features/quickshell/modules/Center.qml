@@ -4,6 +4,11 @@ import "../services"
 // The dock itself: idle state shows the Equalizer in a slim row-height box;
 // opening a mode grows this same Rectangle (one continuous border) to fit
 // the loaded content, rather than a separate box appearing below it.
+//
+// This file carries two concerns at once — the tween/clip/pixel-snap
+// geometry below, and the mode-resolution logic (isActiveForScreen,
+// modeComponents) further down. They don't share much surface area; if a
+// 5th/6th mode makes this file harder to scan, split geometry out first.
 Rectangle {
     id: root
     required property var hostWindow
@@ -11,9 +16,9 @@ Rectangle {
     readonly property int rowHeight: Theme.rowHeight
 
     // Pinned modes (launcher/ask) only expand on the monitor that was
-    // focused when the IPC call came in (Dock.activeScreenName); toasts are
-    // ambient and show on every screen.
-    readonly property bool isActiveForScreen: Dock.pinned && Dock.activeScreenName === hostWindow.screen.name
+    // focused when the IPC call came in; toasts are ambient and show on
+    // every screen.
+    readonly property bool isActiveForScreen: Dock.isActiveFor(hostWindow.screen.name)
     readonly property bool active: Dock.mode === "toast" || isActiveForScreen
 
     // width/height are routed through animWidth/animHeight (continuous,
@@ -60,6 +65,15 @@ Rectangle {
             paused: root.active
         }
 
+        // Whatever this Loader holds is a "mode item": it must expose
+        // implicitWidth/implicitHeight (read above for animWidth/
+        // animHeight), may expose borderColor (read above for
+        // border.color), and may expose focusInput() (called below on
+        // load). Every mode component — NotificationToast, OsdToast,
+        // Launcher, AskOllama, SessionMenu — satisfies this by convention;
+        // nothing enforces it, so a new mode that forgets a member just
+        // renders at size 0 with no error (see this folder's CLAUDE.md,
+        // "Verifying").
         Loader {
             id: loader
             // Pinned to a fixed corner rather than anchors.centerIn: the
@@ -81,16 +95,28 @@ Rectangle {
 
     // One lookup table instead of a ternary chain, so a new mode is one
     // entry here (plus one in Dock.pinnedModes if it's pinned, not
-    // ambient) rather than a new branch to remember to add.
+    // ambient) rather than a new branch to remember to add. toast's entry
+    // dispatches on Dock.currentToast.kind directly — notifications
+    // (NotificationToast, see services/NotificationWatcher.qml) and
+    // hardware OSD feedback (OsdToast, see services/Osd.qml) render as
+    // unrelated shapes with unrelated record fields, so each is its own
+    // component rather than one component branching on an isOsd flag.
     readonly property var modeComponents: ({
-        toast: toastComponent,
+        toast: Dock.currentToast && Dock.currentToast.kind === Dock.toastKinds.osd ? osdToastComponent : notificationToastComponent,
         launcher: launcherComponent,
-        ask: askComponent
+        ask: askComponent,
+        session: sessionComponent,
+        control: controlComponent
     })
 
     Component {
-        id: toastComponent
-        Toast { toast: Dock.currentToast }
+        id: notificationToastComponent
+        NotificationToast { toast: Dock.currentToast }
+    }
+
+    Component {
+        id: osdToastComponent
+        OsdToast { toast: Dock.currentToast }
     }
 
     Component {
@@ -101,5 +127,15 @@ Rectangle {
     Component {
         id: askComponent
         AskOllama {}
+    }
+
+    Component {
+        id: sessionComponent
+        SessionMenu {}
+    }
+
+    Component {
+        id: controlComponent
+        ControlCenter {}
     }
 }

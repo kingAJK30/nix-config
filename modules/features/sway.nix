@@ -31,7 +31,11 @@
 
 	    "${cfg.modifier}+a" = lib.mkDefault "exec quickshell ipc call ask open";
 
-            "${cfg.modifier}+shift+escape" = lib.mkDefault "exec swaylock -f";
+	    "${cfg.modifier}+c" = lib.mkDefault "exec quickshell ipc call control open";
+
+	    "${cfg.modifier}+shift+escape" = lib.mkDefault "exec quickshell ipc call lock lock";
+
+	    "${cfg.modifier}+Escape" = lib.mkDefault "exec quickshell ipc call session open";
 
             "${cfg.modifier}+n" = lib.mkDefault "exec swaync-client -t -sw";
 

@@ -1,6 +1,6 @@
 { config, ... }: {
   flake.modules.nixos.desktop-utils = { ... }: {
-    security.pam.services.swaylock = { };
+    security.pam.services.quickshell-lock = { };
 
     xdg.portal = {
       enable = true;
@@ -12,22 +12,21 @@
 
   flake.modules.homeManager.desktop-utils = { pkgs, lib, ... }: {
 
-    programs.swaylock.enable = true;
     services.swayidle = {
       enable = true;
       events = {
-        before-sleep = "${pkgs.swaylock}/bin/swaylock -f";
-        lock = "${pkgs.swaylock}/bin/swaylock -f";
+	before-sleep = "${pkgs.quickshell}/bin/quickshell ipc call lock lock";
+	lock = "${pkgs.quickshell}/bin/quickshell ipc call lock lock";
       };
       timeouts = [
         {
-          timeout = 600;
-          command = "${pkgs.swaylock}/bin/swaylock -f";
+          timeout = 1800;
+	  command = "${pkgs.quickshell}/bin/quickshell ipc call lock lock";
         }
         {
-          timeout = 900;
-          command = "${pkgs.sway}/bin/swaymsg \"output * power off\"";
-          resumeCommand = "${pkgs.sway}/bin/swaymsg \"output * power on\"";
+          timeout = 3600;
+	  command = "${pkgs.sway}/bin/swaymsg \"output * power off\"";
+      resumeCommand = "${pkgs.sway}/bin/swaymsg \"output * power on\"";
         }
       ];
     };

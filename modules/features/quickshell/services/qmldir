@@ -2,5 +2,12 @@ singleton Theme 1.0 Theme.qml
 singleton Stats 1.0 Stats.qml
 singleton Dock 1.0 Dock.qml
 singleton OllamaConfig 1.0 OllamaConfig.qml
+singleton Osd 1.0 Osd.qml
+singleton VolumeControl 1.0 VolumeControl.qml
+singleton Lock 1.0 Lock.qml
+singleton Keyboard 1.0 Keyboard.qml
+singleton Bluetooth 1.0 Bluetooth.qml
+singleton DoNotDisturb 1.0 DoNotDisturb.qml
 RestartableProcess 1.0 RestartableProcess.qml
+PolledShellValue 1.0 PolledShellValue.qml
 NotificationWatcher 1.0 NotificationWatcher.qml

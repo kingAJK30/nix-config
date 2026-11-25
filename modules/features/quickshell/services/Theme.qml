@@ -16,6 +16,7 @@ Singleton {
     readonly property string font: adapter.fonts.mono
     readonly property int fontSize: adapter.fonts.size
     readonly property int rowHeight: 32
+    readonly property string wallpaper: adapter.wallpaper
 
     // Shared motion profile: one mechanical "robot" language for every
     // animation in the bar. micro = color/toggle snaps, macro = size/position
@@ -42,6 +43,7 @@ Singleton {
 
         JsonAdapter {
             id: adapter
+            property string wallpaper: ""
             property JsonObject colors: JsonObject {
                 property string bg: "#ff00ff"
                 property string surface: "#ff00ff"

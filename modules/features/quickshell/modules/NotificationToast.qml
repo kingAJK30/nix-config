@@ -4,12 +4,12 @@ import Quickshell.Widgets
 import "../components"
 import "../services"
 
+// Notification record shape: see services/NotificationWatcher.qml.
 Item {
     id: root
-    // Toast record shape: see services/NotificationWatcher.qml.
     required property var toast
 
-    // Read by CenterOverlay to tint the island's border for notification urgency.
+    // Read by Center.qml to tint the island's border for notification urgency.
     readonly property color borderColor: toast.urgency === 2 ? Theme.red
         : toast.urgency === 0 ? Theme.dim
         : Theme.border
